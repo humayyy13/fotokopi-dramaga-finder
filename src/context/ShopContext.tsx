@@ -1,35 +1,57 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from "react";
-import { Shop, initialShops } from "@/data/shops";
+import { Shop, dbRowToShop, shopToDbRow } from "@/data/shops";
+import { supabase } from "@/integrations/supabase/client";
 
 interface ShopContextType {
   shops: Shop[];
-  addShop: (shop: Shop) => void;
-  updateShop: (shop: Shop) => void;
-  deleteShop: (id: string) => void;
+  loading: boolean;
+  addShop: (shop: Shop) => Promise<void>;
+  updateShop: (shop: Shop) => Promise<void>;
+  deleteShop: (id: string) => Promise<void>;
   getShop: (id: string) => Shop | undefined;
 }
 
 const ShopContext = createContext<ShopContextType | undefined>(undefined);
 
 export const ShopProvider = ({ children }: { children: ReactNode }) => {
-  const [shops, setShops] = useState<Shop[]>(() => {
-    const saved = localStorage.getItem("sig-shops");
-    return saved ? JSON.parse(saved) : initialShops;
-  });
+  const [shops, setShops] = useState<Shop[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  const fetchShops = async () => {
+    const { data, error } = await supabase.from("shops").select("*").order("created_at", { ascending: true });
+    if (!error && data) {
+      setShops(data.map(dbRowToShop));
+    }
+    setLoading(false);
+  };
 
   useEffect(() => {
-    localStorage.setItem("sig-shops", JSON.stringify(shops));
-  }, [shops]);
+    fetchShops();
+  }, []);
 
-  const addShop = (shop: Shop) => setShops((prev) => [...prev, shop]);
-  const updateShop = (shop: Shop) =>
-    setShops((prev) => prev.map((s) => (s.id === shop.id ? shop : s)));
-  const deleteShop = (id: string) =>
-    setShops((prev) => prev.filter((s) => s.id !== id));
+  const addShop = async (shop: Shop) => {
+    const row = shopToDbRow(shop);
+    const { id, ...rest } = row;
+    const { error } = await supabase.from("shops").insert(rest);
+    if (!error) await fetchShops();
+  };
+
+  const updateShop = async (shop: Shop) => {
+    const row = shopToDbRow(shop);
+    const { id, ...rest } = row;
+    const { error } = await supabase.from("shops").update(rest).eq("id", shop.id);
+    if (!error) await fetchShops();
+  };
+
+  const deleteShop = async (id: string) => {
+    const { error } = await supabase.from("shops").delete().eq("id", id);
+    if (!error) await fetchShops();
+  };
+
   const getShop = (id: string) => shops.find((s) => s.id === id);
 
   return (
-    <ShopContext.Provider value={{ shops, addShop, updateShop, deleteShop, getShop }}>
+    <ShopContext.Provider value={{ shops, loading, addShop, updateShop, deleteShop, getShop }}>
       {children}
     </ShopContext.Provider>
   );

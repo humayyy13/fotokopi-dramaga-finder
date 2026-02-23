@@ -7,8 +7,8 @@ const AdminShopList = () => {
   const { shops, deleteShop } = useShops();
   const [confirmId, setConfirmId] = useState<string | null>(null);
 
-  const handleDelete = (id: string) => {
-    deleteShop(id);
+  const handleDelete = async (id: string) => {
+    await deleteShop(id);
     setConfirmId(null);
   };
 
