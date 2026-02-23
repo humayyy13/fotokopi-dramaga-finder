@@ -14,7 +14,63 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      shops: {
+        Row: {
+          address: string
+          close_time: string
+          created_at: string
+          description: string
+          fotokopi: boolean
+          hours: string
+          id: string
+          image: string
+          jilid: boolean
+          laminating: boolean
+          lat: number
+          lng: number
+          name: string
+          open_time: string
+          print_warna: boolean
+          rating: number
+        }
+        Insert: {
+          address: string
+          close_time?: string
+          created_at?: string
+          description?: string
+          fotokopi?: boolean
+          hours?: string
+          id?: string
+          image?: string
+          jilid?: boolean
+          laminating?: boolean
+          lat?: number
+          lng?: number
+          name: string
+          open_time?: string
+          print_warna?: boolean
+          rating?: number
+        }
+        Update: {
+          address?: string
+          close_time?: string
+          created_at?: string
+          description?: string
+          fotokopi?: boolean
+          hours?: string
+          id?: string
+          image?: string
+          jilid?: boolean
+          laminating?: boolean
+          lat?: number
+          lng?: number
+          name?: string
+          open_time?: string
+          print_warna?: boolean
+          rating?: number
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
