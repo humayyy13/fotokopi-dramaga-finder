@@ -69,7 +69,7 @@ const MapView = ({ shops, selectedId, className = "" }: MapViewProps) => {
           <h3 style="font-weight:600;font-size:14px;margin:0 0 4px">${shop.name}</h3>
           <p style="font-size:12px;color:#666;margin:0 0 4px">${shop.address}</p>
           <p style="font-size:12px;margin:0 0 6px">⭐ ${shop.rating} · ${shop.hours}</p>
-          <a href="/shop/${shop.id}" style="font-size:12px;color:hsl(152,45%,25%);font-weight:500">Lihat Detail →</a>
+          <a href="/shop/${shop.id}" style="font-size:12px;color:hsl(0,0%,28%);font-weight:500">Lihat Detail →</a>
         </div>
       `);
 

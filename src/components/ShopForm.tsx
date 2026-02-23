@@ -4,7 +4,7 @@ import { Shop } from "@/data/shops";
 
 interface ShopFormProps {
   initial?: Shop;
-  onSubmit: (shop: Shop) => void;
+  onSubmit: (shop: Shop) => void | Promise<void>;
   title: string;
 }
 
@@ -36,11 +36,11 @@ const ShopForm = ({ initial, onSubmit, title }: ShopFormProps) => {
     return Object.keys(e).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validate()) return;
     const hours = `${form.openTime} - ${form.closeTime}`;
-    onSubmit({
+    await onSubmit({
       id: initial?.id || crypto.randomUUID(),
       ...form,
       hours,
