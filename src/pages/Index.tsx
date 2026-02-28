@@ -4,6 +4,7 @@ import { Search, MapPin, Copy } from "lucide-react";
 import { useShops } from "@/context/ShopContext";
 import FeatureCards from "@/components/FeatureCards";
 import ShopCard from "@/components/ShopCard";
+import HeroIllustration from "@/components/HeroIllustration";
 
 const Index = () => {
   const { shops } = useShops();
@@ -20,44 +21,58 @@ const Index = () => {
   }, [shops, search]);
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-background relative overflow-hidden">
       {/* Hero */}
-      <section className="hero-gradient text-primary-foreground py-20 px-4">
-        <div className="container mx-auto text-center max-w-3xl">
-          <h1 className="text-3xl md:text-5xl font-bold mb-4 leading-tight animate-fade-in">
-            Temukan Jasa Fotokopi Terdekat di Dramaga dengan Mudah
-          </h1>
-          <p className="text-primary-foreground/80 text-lg mb-8 animate-fade-in" style={{ animationDelay: "0.1s" }}>
-            Sistem Informasi Geografis untuk pencarian lokasi fotokopi di wilayah Dramaga, Bogor
-          </p>
+      <section className="relative pt-20 pb-16 lg:pt-28 lg:pb-24 px-4 overflow-hidden">
+        <div className="container mx-auto max-w-6xl relative z-10">
+          <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
 
-          {/* Search */}
-          <div className="relative max-w-xl mx-auto mb-8 animate-fade-in" style={{ animationDelay: "0.2s" }}>
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
-            <input
-              type="text"
-              placeholder="Cari nama atau alamat fotokopi..."
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              className="w-full pl-12 pr-4 py-3.5 rounded-xl bg-card text-card-foreground border-0 shadow-lg text-sm focus:outline-none focus:ring-2 focus:ring-accent"
-            />
-          </div>
+            {/* Left Column: Text & Search */}
+            <div className="text-center lg:text-left order-2 lg:order-1 pt-4 lg:pt-0">
+              <h1 className="text-4xl md:text-5xl lg:text-[3.5rem] font-extrabold mb-6 leading-[1.15] tracking-tight text-foreground animate-fade-in">
+                Temukan Jasa Fotokopi Terdekat di Dramaga
+              </h1>
+              <p className="text-muted-foreground text-lg md:text-xl mb-10 animate-fade-in max-w-2xl mx-auto lg:mx-0 leading-relaxed" style={{ animationDelay: "0.1s" }}>
+                Sistem Informasi Geografis untuk pencarian lokasi fotokopi di wilayah Dramaga, Bogor dengan cepat dan mudah.
+              </p>
 
-          <div className="flex flex-wrap gap-3 justify-center animate-fade-in" style={{ animationDelay: "0.3s" }}>
-            <Link
-              to="/map"
-              className="inline-flex items-center gap-2 bg-card text-primary px-6 py-3 rounded-xl font-medium hover:bg-card/90 transition-colors shadow-lg"
-            >
-              <MapPin className="h-4 w-4" />
-              Lihat Peta
-            </Link>
-            <button
-              onClick={() => document.getElementById("shop-list")?.scrollIntoView({ behavior: "smooth" })}
-              className="inline-flex items-center gap-2 bg-accent text-accent-foreground px-6 py-3 rounded-xl font-medium hover:bg-accent/90 transition-colors"
-            >
-              <Copy className="h-4 w-4" />
-              Cari Fotokopi
-            </button>
+              {/* Search */}
+              <div className="relative max-w-2xl mx-auto lg:mx-0 mb-10 animate-fade-in" style={{ animationDelay: "0.2s" }}>
+                <div className="relative shadow-sm hover:shadow-md transition-shadow rounded-2xl bg-white border border-border/60 p-2 flex items-center h-16">
+                  <Search className="absolute left-6 text-muted-foreground h-6 w-6" />
+                  <input
+                    type="text"
+                    placeholder="Cari nama atau alamat fotokopi..."
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                    className="w-full pl-16 pr-4 h-full bg-transparent border-none text-foreground text-lg focus:outline-none focus:ring-0 placeholder:text-muted-foreground/70"
+                  />
+                </div>
+              </div>
+
+              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center animate-fade-in" style={{ animationDelay: "0.3s" }}>
+                <button
+                  onClick={() => document.getElementById("shop-list")?.scrollIntoView({ behavior: "smooth" })}
+                  className="inline-flex items-center justify-center gap-2 bg-accent text-accent-foreground px-8 py-4 rounded-xl font-bold text-lg hover:opacity-90 hover:-translate-y-0.5 transition-all w-full sm:w-auto shadow-sm"
+                >
+                  <Search className="h-5 w-5" />
+                  Cari Fotokopi
+                </button>
+                <Link
+                  to="/map"
+                  className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-8 py-4 rounded-xl font-bold text-lg hover:opacity-90 hover:-translate-y-0.5 transition-all w-full sm:w-auto shadow-sm"
+                >
+                  <MapPin className="h-5 w-5" />
+                  Lihat Peta
+                </Link>
+              </div>
+            </div>
+
+            {/* Right Column: Illustration */}
+            <div className="order-1 lg:order-2 w-full max-w-md mx-auto lg:max-w-none px-4 lg:px-0">
+              <HeroIllustration />
+            </div>
+
           </div>
         </div>
       </section>

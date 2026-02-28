@@ -9,40 +9,55 @@ const AdminDashboard = () => {
     <div>
       <h1 className="text-2xl font-bold mb-6">Dashboard</h1>
 
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
-        <div className="bg-card rounded-xl p-5 card-shadow">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-              <Store className="h-5 w-5 text-primary" />
-            </div>
-            <div>
-              <p className="text-2xl font-bold">{shops.length}</p>
-              <p className="text-sm text-muted-foreground">Total Toko</p>
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6 mb-8 mt-2">
+        {[
+          {
+            title: "Total Toko",
+            value: shops.length,
+            icon: Store,
+            bgClass: "bg-blue-600",
+            textClass: "text-white",
+            mutedClass: "text-blue-100",
+            iconBg: "bg-white/20",
+            delay: "0s",
+          },
+          {
+            title: "Rata-rata Rating",
+            value: avgRating,
+            icon: Star,
+            bgClass: "bg-rose-600",
+            textClass: "text-white",
+            mutedClass: "text-rose-100",
+            iconBg: "bg-white/20",
+            delay: "0.2s",
+          },
+          {
+            title: "Wilayah",
+            value: "Dramaga",
+            icon: MapPin,
+            bgClass: "bg-emerald-600",
+            textClass: "text-white",
+            mutedClass: "text-emerald-100",
+            iconBg: "bg-white/20",
+            delay: "0.4s",
+          },
+        ].map((stat) => (
+          <div
+            key={stat.title}
+            className={`${stat.bgClass} rounded-2xl p-6 shadow-sm border border-black/5 animate-float-wave hover:shadow-md transition-shadow`}
+            style={{ animationDelay: stat.delay }}
+          >
+            <div className={`flex items-start gap-4 ${stat.textClass}`}>
+              <div className={`w-12 h-12 rounded-xl ${stat.iconBg} flex items-center justify-center shrink-0`}>
+                <stat.icon className="h-6 w-6" />
+              </div>
+              <div className="mt-1">
+                <p className="text-3xl font-bold tracking-tight mb-1">{stat.value}</p>
+                <p className={`text-sm font-medium ${stat.mutedClass}`}>{stat.title}</p>
+              </div>
             </div>
           </div>
-        </div>
-        <div className="bg-card rounded-xl p-5 card-shadow">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-              <Star className="h-5 w-5 text-primary" />
-            </div>
-            <div>
-              <p className="text-2xl font-bold">{avgRating}</p>
-              <p className="text-sm text-muted-foreground">Rata-rata Rating</p>
-            </div>
-          </div>
-        </div>
-        <div className="bg-card rounded-xl p-5 card-shadow">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-              <MapPin className="h-5 w-5 text-primary" />
-            </div>
-            <div>
-              <p className="text-2xl font-bold">Dramaga</p>
-              <p className="text-sm text-muted-foreground">Wilayah</p>
-            </div>
-          </div>
-        </div>
+        ))}
       </div>
 
       <div className="bg-card rounded-xl p-5 card-shadow">
