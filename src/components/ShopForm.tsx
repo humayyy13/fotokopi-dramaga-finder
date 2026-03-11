@@ -119,7 +119,7 @@ const ShopForm = ({ initial, onSubmit, title }: ShopFormProps) => {
                 <input type="checkbox" checked={form.services[key]}
                   onChange={(e) => setForm((f) => ({ ...f, services: { ...f.services, [key]: e.target.checked } }))}
                   className="rounded" />
-                {key === "printWarna" ? "Print Warna" : key.charAt(0).toUpperCase() + key.slice(1)}
+                {key === "printWarna" ? "Print Warna" : key === "laminating" ? "Foto Copy Warna" : key.charAt(0).toUpperCase() + key.slice(1)}
               </label>
             ))}
           </div>

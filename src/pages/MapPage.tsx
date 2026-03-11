@@ -88,7 +88,7 @@ const MapPage = () => {
                   className="rounded-md border-border/60 text-primary focus:ring-primary w-4 h-4 transition-colors"
                 />
                 <span className="text-muted-foreground group-hover:text-foreground transition-colors font-medium">
-                  {key === "openNow" ? "Buka Sekarang" : key === "printWarna" ? "Print Warna" : key.charAt(0).toUpperCase() + key.slice(1)}
+                  {key === "openNow" ? "Buka Sekarang" : key === "printWarna" ? "Print Warna" : key === "laminating" ? "Foto Copy Warna" : key.charAt(0).toUpperCase() + key.slice(1)}
                 </span>
               </label>
             ))}

@@ -1,66 +1,78 @@
 const HeroIllustration = () => {
     return (
-        <div className="w-full max-w-lg mx-auto lg:mr-0 animate-fade-in" style={{ animationDelay: "0.2s" }}>
+        <div className="w-full max-w-lg mx-auto lg:mr-0 animate-fade-in relative" style={{ animationDelay: "0.2s" }}>
+            {/* Soft decorative background blob */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-[#f4f7f4] rounded-full blur-[80px] -z-10" />
+
             <svg
-                viewBox="0 0 500 400"
-                className="w-full h-auto drop-shadow-xl"
+                viewBox="0 0 500 450"
+                className="w-full h-auto drop-shadow-2xl"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
             >
-                {/* City Skyline Background (Minimal, low opacity) */}
-                <path d="M40 350 V180 h45 v-40 h55 v80 h35 v-60 h65 v140 h-200 z" fill="#1a4d33" fillOpacity="0.04" />
-                <path d="M240 350 V140 h50 v40 h40 v-30 h60 v200 h-150 z" fill="#1a4d33" fillOpacity="0.06" />
+                {/* Modern Abstract Shapes Background */}
+                <circle cx="250" cy="225" r="180" fill="#fcfaf8" />
+                <circle cx="250" cy="225" r="180" stroke="#166534" strokeOpacity="0.05" strokeWidth="2" />
 
-                {/* Main Photocopy Shop Building */}
-                <rect x="90" y="200" width="320" height="150" rx="16" fill="#ffffff" />
-                <rect x="90" y="200" width="320" height="150" rx="16" stroke="#1a4d33" strokeOpacity="0.08" strokeWidth="2" />
+                <path d="M70 225 c0-99 81-180 180-180 c99 0 180 81 180 180 c0 99 -81 180 -180 180" fill="#e8f3ee" opacity="0.6" />
 
-                {/* Shop Awning / Roof Accent (Mustard Yellow) */}
-                <path d="M80 200 Q 250 170 420 200 v 24 H 80 z" fill="#eec829" />
-                <path d="M80 224 h 340 v 6 a 4 4 0 0 1 -4 4 H 84 a 4 4 0 0 1 -4 -4 z" fill="#d4b220" />
+                {/* Left Plant */}
+                <path d="M 120 370 C 100 370, 80 340, 100 300 C 130 300, 130 340, 120 370 Z" fill="#14532d" opacity="0.8" />
+                <path d="M 140 370 C 150 370, 160 330, 140 280 C 110 280, 100 330, 140 370 Z" fill="#166534" opacity="0.9" />
 
-                {/* Shop Window */}
-                <rect x="120" y="240" width="130" height="85" rx="8" fill="#f4f0eb" />
-                <rect x="130" y="250" width="110" height="65" rx="4" fill="#e8e4db" />
+                {/* Right Plant */}
+                <path d="M 380 370 C 400 370, 420 350, 400 320 C 370 320, 360 350, 380 370 Z" fill="#166534" opacity="0.7" />
 
-                {/* Door */}
-                <rect x="280" y="240" width="60" height="110" rx="6" fill="#1a4d33" />
-                <rect x="285" y="245" width="50" height="40" rx="4" fill="#f4f0eb" fillOpacity="0.2" />
-                <circle cx="330" cy="295" r="4" fill="#ffffff" />
-                <rect x="280" y="345" width="60" height="5" fill="#143c27" />
+                {/* Shop / Printer Base - Cream / White minimalist block */}
+                <rect x="140" y="190" width="220" height="180" rx="24" fill="#ffffff" />
+                <rect x="140" y="190" width="220" height="180" rx="24" stroke="#166534" strokeOpacity="0.06" strokeWidth="4" />
 
-                {/* Modern Photocopier Machine next to window */}
-                <rect x="360" y="270" width="45" height="80" rx="6" fill="#f4f0eb" stroke="#1a4d33" strokeOpacity="0.15" strokeWidth="2" />
-                <rect x="360" y="260" width="45" height="15" rx="4" fill="#1a4d33" />
-                {/* Paper sorting tray */}
-                <path d="M 365 250 l 30 0 l -4 10 l -22 0 z" fill="#eec829" />
-                <rect x="365" y="285" width="35" height="8" rx="2" fill="#e8e4db" />
-                <rect x="365" y="300" width="35" height="8" rx="2" fill="#e8e4db" />
-                <rect x="365" y="315" width="35" height="8" rx="2" fill="#e8e4db" />
+                {/* Dark Green Top Accent */}
+                <path d="M 140 214 Q 140 190 164 190 H 336 Q 360 190 360 214 V 220 H 140 Z" fill="#166534" />
 
-                {/* Dynamic Element: Papers flying */}
-                <rect x="380" y="235" width="18" height="24" rx="2" fill="#ffffff" stroke="#1a4d33" strokeOpacity="0.15" transform="rotate(15 389 247)" />
-                <rect x="370" y="220" width="18" height="24" rx="2" fill="#ffffff" stroke="#1a4d33" strokeOpacity="0.15" transform="rotate(-12 379 232)" />
-                <rect x="390" y="205" width="18" height="24" rx="2" fill="#ffffff" stroke="#1a4d33" strokeOpacity="0.15" transform="rotate(25 399 217)" />
+                {/* Yellow Accent Line */}
+                <rect x="140" y="220" width="220" height="6" fill="#fde68a" />
 
-                {/* Minimal Plants/Decor */}
-                <path d="M 70 350 c 0 -35 15 -45 25 -45 c 10 0 25 10 25 45 z" fill="#1a4d33" fillOpacity="0.85" />
-                <path d="M 60 350 c 0 -25 10 -35 20 -35 c 10 0 20 10 20 35 z" fill="#1a4d33" fillOpacity="0.6" />
+                {/* UI Element on Printer/Shop - Paper Output */}
+                <rect x="180" y="250" width="140" height="85" rx="12" fill="#f5f7f5" />
 
-                <path d="M 430 350 c 0 -25 -15 -35 -25 -35 c -10 0 -25 10 -25 35 z" fill="#1a4d33" fillOpacity="0.75" />
+                {/* Glowing Scanner light or shop window */}
+                <rect x="190" y="260" width="120" height="40" rx="8" fill="#e8f3ee" />
+                <path d="M 190 280 L 310 280" stroke="#86efac" strokeWidth="4" strokeOpacity="0.5" />
 
-                {/* Shop Sign Background */}
-                <rect x="180" y="150" width="140" height="36" rx="18" fill="#1a4d33" />
-                {/* Sign Text */}
-                <text x="250" y="174" fill="#ffffff" fontSize="16" fontWeight="bold" textAnchor="middle" fontFamily="system-ui, sans-serif" letterSpacing="1">FOTOKOPI</text>
+                {/* Output tray */}
+                <rect x="200" y="315" width="100" height="8" rx="4" fill="#d1e0d7" />
 
-                {/* Ground Line */}
-                <path d="M 30 350 h 440" stroke="#1a4d33" strokeOpacity="0.1" strokeWidth="2" strokeLinecap="round" />
+                {/* Minimalist Floating Papers */}
+                {/* Paper 1 */}
+                <g transform="translate(240, 80) rotate(-10)">
+                    <rect x="0" y="0" width="50" height="70" rx="4" fill="#ffffff" stroke="#166534" strokeWidth="2" strokeOpacity="0.1" />
+                    <rect x="10" y="15" width="30" height="4" rx="2" fill="#166534" fillOpacity="0.2" />
+                    <rect x="10" y="25" width="20" height="4" rx="2" fill="#166534" fillOpacity="0.2" />
+                    <rect x="10" y="45" width="15" height="10" rx="2" fill="#4ade80" fillOpacity="0.4" />
+                </g>
 
-                {/* Abstract Clouds / Shapes in sky */}
-                <rect x="80" y="60" width="60" height="16" rx="8" fill="#1a4d33" fillOpacity="0.04" />
-                <rect x="110" y="50" width="40" height="16" rx="8" fill="#1a4d33" fillOpacity="0.04" />
-                <rect x="350" y="80" width="70" height="16" rx="8" fill="#eec829" fillOpacity="0.1" />
+                {/* Paper 2 */}
+                <g transform="translate(160, 110) rotate(-35)">
+                    <rect x="0" y="0" width="45" height="60" rx="4" fill="#ffffff" stroke="#166534" strokeWidth="2" strokeOpacity="0.1" />
+                    <rect x="8" y="15" width="22" height="4" rx="2" fill="#166534" fillOpacity="0.2" />
+                    <rect x="8" y="25" width="28" height="4" rx="2" fill="#166534" fillOpacity="0.2" />
+                </g>
+
+                {/* Paper 3 */}
+                <g transform="translate(320, 130) rotate(20)">
+                    <rect x="0" y="0" width="40" height="55" rx="4" fill="#ffffff" stroke="#166534" strokeWidth="2" strokeOpacity="0.1" />
+                    <rect x="8" y="12" width="24" height="4" rx="2" fill="#fde68a" />
+                    <rect x="8" y="22" width="18" height="4" rx="2" fill="#166534" fillOpacity="0.2" />
+                </g>
+
+                {/* Abstract geometric shapes matching the theme */}
+                <circle cx="120" cy="150" r="12" fill="#fde68a" opacity="0.8" />
+                <rect x="370" y="100" width="16" height="16" rx="4" fill="#4ade80" opacity="0.6" transform="rotate(25 370 100)" />
+                <path d="M 120 220 L 130 200 L 110 200 Z" fill="#86efac" opacity="0.5" />
+
+                {/* Base Shadow */}
+                <ellipse cx="250" cy="380" rx="140" ry="10" fill="#166534" opacity="0.08" />
             </svg>
         </div>
     );

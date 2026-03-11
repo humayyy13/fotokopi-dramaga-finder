@@ -53,14 +53,14 @@ const Index = () => {
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center animate-fade-in" style={{ animationDelay: "0.3s" }}>
                 <button
                   onClick={() => document.getElementById("shop-list")?.scrollIntoView({ behavior: "smooth" })}
-                  className="inline-flex items-center justify-center gap-2 bg-accent text-accent-foreground px-8 py-4 rounded-xl font-bold text-lg hover:opacity-90 hover:-translate-y-0.5 transition-all w-full sm:w-auto shadow-sm"
+                  className="inline-flex items-center justify-center gap-2 bg-white border-2 border-primary/20 text-primary px-8 py-4 rounded-2xl font-bold text-lg hover:bg-primary/5 hover:border-primary/30 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 w-full sm:w-auto"
                 >
                   <Search className="h-5 w-5" />
                   Cari Fotokopi
                 </button>
                 <Link
                   to="/map"
-                  className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-8 py-4 rounded-xl font-bold text-lg hover:opacity-90 hover:-translate-y-0.5 transition-all w-full sm:w-auto shadow-sm"
+                  className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-8 py-4 rounded-2xl font-bold text-lg shadow-md hover:shadow-xl hover:-translate-y-1 hover:bg-primary/95 transition-all duration-300 w-full sm:w-auto"
                 >
                   <MapPin className="h-5 w-5" />
                   Lihat Peta
