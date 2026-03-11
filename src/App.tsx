@@ -22,7 +22,8 @@ import NotFound from "./pages/NotFound";
 const queryClient = new QueryClient();
 
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
-  const { isAdmin } = useAuth();
+  const { isAdmin, loading } = useAuth();
+  if (loading) return <div className="min-h-screen flex items-center justify-center text-muted-foreground">Loading...</div>;
   return isAdmin ? <>{children}</> : <Navigate to="/admin/login" replace />;
 };
 
