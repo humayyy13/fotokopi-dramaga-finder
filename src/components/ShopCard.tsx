@@ -1,17 +1,29 @@
-import { Star } from "lucide-react";
+import { Star, MapPin } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Shop } from "@/data/shops";
+import { formatDistance } from "@/lib/geo-utils";
 
-const ShopCard = ({ shop }: { shop: Shop }) => (
+interface ShopCardProps {
+  shop: Shop;
+  distance?: number | null; // distance in meters
+}
+
+const ShopCard = ({ shop, distance }: ShopCardProps) => (
   <Link
     to={`/shop/${shop.id}`}
     className="block bg-card rounded-xl overflow-hidden card-shadow hover:card-shadow-hover transition-all duration-300 hover:-translate-y-1"
   >
-    <div className="h-40 bg-primary/10 flex items-center justify-center">
+    <div className="h-40 bg-primary/10 flex items-center justify-center relative">
       {shop.image ? (
         <img src={shop.image} alt={shop.name} className="w-full h-full object-cover" />
       ) : (
         <span className="text-4xl">🏪</span>
+      )}
+      {distance != null && (
+        <span className="absolute top-3 right-3 inline-flex items-center gap-1 bg-blue-500/90 text-white text-xs font-bold px-2.5 py-1 rounded-full shadow-lg backdrop-blur-sm">
+          <MapPin className="h-3 w-3" />
+          {formatDistance(distance)}
+        </span>
       )}
     </div>
     <div className="p-5">

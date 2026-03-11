@@ -1,7 +1,9 @@
 import { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
-import { Search, MapPin, Copy } from "lucide-react";
+import { Search, MapPin, Copy, Navigation, Loader2 } from "lucide-react";
 import { useShops } from "@/context/ShopContext";
+import { useGeolocation } from "@/hooks/useGeolocation";
+import { sortByDistance, haversineDistance } from "@/lib/geo-utils";
 import FeatureCards from "@/components/FeatureCards";
 import ShopCard from "@/components/ShopCard";
 import HeroIllustration from "@/components/HeroIllustration";
@@ -9,16 +11,38 @@ import HeroIllustration from "@/components/HeroIllustration";
 const Index = () => {
   const { shops } = useShops();
   const [search, setSearch] = useState("");
+  const [sortNearest, setSortNearest] = useState(false);
+  const { lat, lng, loading: geoLoading, error: geoError, requestLocation } = useGeolocation();
+
+  const handleNearestToggle = () => {
+    if (!lat && !sortNearest) {
+      requestLocation();
+      setSortNearest(true);
+    } else {
+      setSortNearest(!sortNearest);
+    }
+  };
 
   const filtered = useMemo(() => {
-    if (!search.trim()) return shops;
-    const q = search.toLowerCase();
-    return shops.filter(
-      (s) =>
-        s.name.toLowerCase().includes(q) ||
-        s.address.toLowerCase().includes(q)
-    );
-  }, [shops, search]);
+    let result = shops;
+    if (search.trim()) {
+      const q = search.toLowerCase();
+      result = result.filter(
+        (s) =>
+          s.name.toLowerCase().includes(q) ||
+          s.address.toLowerCase().includes(q)
+      );
+    }
+
+    if (sortNearest && lat != null && lng != null) {
+      return sortByDistance(result, lat, lng);
+    }
+
+    return result.map((s) => ({
+      ...s,
+      distance: lat != null && lng != null ? haversineDistance(lat, lng, s.lat, s.lng) : undefined,
+    }));
+  }, [shops, search, sortNearest, lat, lng]);
 
   return (
     <div className="min-h-screen bg-background relative overflow-hidden">
@@ -52,11 +76,19 @@ const Index = () => {
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center animate-fade-in" style={{ animationDelay: "0.3s" }}>
                 <button
-                  onClick={() => document.getElementById("shop-list")?.scrollIntoView({ behavior: "smooth" })}
-                  className="inline-flex items-center justify-center gap-2 bg-white border-2 border-primary/20 text-primary px-8 py-4 rounded-2xl font-bold text-lg hover:bg-primary/5 hover:border-primary/30 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 w-full sm:w-auto"
+                  onClick={handleNearestToggle}
+                  className={`inline-flex items-center justify-center gap-2 px-8 py-4 rounded-2xl font-bold text-lg transition-all duration-300 w-full sm:w-auto ${
+                    sortNearest
+                      ? "bg-blue-500 text-white shadow-lg shadow-blue-500/25 hover:bg-blue-600"
+                      : "bg-white border-2 border-primary/20 text-primary hover:bg-primary/5 hover:border-primary/30 hover:shadow-lg"
+                  } hover:-translate-y-1`}
                 >
-                  <Search className="h-5 w-5" />
-                  Cari Fotokopi
+                  {geoLoading ? (
+                    <Loader2 className="h-5 w-5 animate-spin" />
+                  ) : (
+                    <Navigation className="h-5 w-5" />
+                  )}
+                  {sortNearest ? "Terdekat Aktif" : "Toko Terdekat"}
                 </button>
                 <Link
                   to="/map"
@@ -66,6 +98,10 @@ const Index = () => {
                   Lihat Peta
                 </Link>
               </div>
+
+              {geoError && (
+                <p className="text-sm text-red-500 mt-3 animate-fade-in">{geoError}</p>
+              )}
             </div>
 
             {/* Right Column: Illustration */}
@@ -85,13 +121,18 @@ const Index = () => {
           <h2 className="text-2xl font-bold text-center mb-2">Daftar Fotokopi</h2>
           <p className="text-muted-foreground text-center mb-10">
             {filtered.length} toko ditemukan{search && ` untuk "${search}"`}
+            {sortNearest && lat != null && " — diurutkan berdasarkan jarak terdekat"}
           </p>
           {filtered.length === 0 ? (
             <p className="text-center text-muted-foreground py-12">Tidak ada toko yang ditemukan.</p>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {filtered.map((shop) => (
-                <ShopCard key={shop.id} shop={shop} />
+                <ShopCard
+                  key={shop.id}
+                  shop={shop}
+                  distance={"distance" in shop ? (shop as any).distance : undefined}
+                />
               ))}
             </div>
           )}
