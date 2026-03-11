@@ -1,55 +1,116 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/context/AuthContext";
-import { MapPin, Lock } from "lucide-react";
+import { Lock } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 
 const AdminLogin = () => {
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [isSettingUp, setIsSettingUp] = useState(false);
+  const [showSetup, setShowSetup] = useState(false);
+  const [setupDone, setSetupDone] = useState(false);
   const { login } = useAuth();
   const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (login(password)) {
-      navigate("/admin");
+    setError("");
+    const result = await login(email, password);
+    if (result.error) {
+      setError(result.error);
     } else {
-      setError("Password salah");
+      navigate("/admin");
+    }
+  };
+
+  const handleSetup = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError("");
+    setIsSettingUp(true);
+    try {
+      const { data, error } = await supabase.functions.invoke("create-admin", {
+        body: { email, password },
+      });
+      if (error) {
+        setError(error.message || "Gagal membuat admin");
+      } else if (data?.error) {
+        setError(data.error);
+      } else {
+        setSetupDone(true);
+        setShowSetup(false);
+        // Auto login
+        await login(email, password);
+        navigate("/admin");
+      }
+    } catch (err: any) {
+      setError(err.message || "Terjadi kesalahan");
+    } finally {
+      setIsSettingUp(false);
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4">
+    <div className="min-h-screen flex items-center justify-center px-4 bg-background">
       <div className="bg-card rounded-xl p-8 card-shadow w-full max-w-sm">
         <div className="text-center mb-6">
           <div className="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-primary/10 text-primary mb-3">
             <Lock className="h-7 w-7" />
           </div>
-          <h1 className="text-xl font-bold">Admin Login</h1>
+          <h1 className="text-xl font-bold text-foreground">Admin Login</h1>
           <p className="text-sm text-muted-foreground mt-1">SIG Fotokopi Dramaga</p>
         </div>
-        <form onSubmit={handleSubmit} className="space-y-4">
+
+        <form onSubmit={showSetup ? handleSetup : handleSubmit} className="space-y-4">
           <div>
-            <label className="text-sm font-medium mb-1 block">Password</label>
+            <label className="text-sm font-medium mb-1 block text-foreground">Email</label>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => { setEmail(e.target.value); setError(""); }}
+              placeholder="admin@example.com"
+              className="w-full px-3 py-2.5 rounded-lg border border-border bg-background text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+              required
+            />
+          </div>
+          <div>
+            <label className="text-sm font-medium mb-1 block text-foreground">Password</label>
             <input
               type="password"
               value={password}
               onChange={(e) => { setPassword(e.target.value); setError(""); }}
-              placeholder="Masukkan password admin"
-              className="w-full px-3 py-2.5 rounded-lg border border-border bg-background text-sm focus:outline-none focus:ring-2 focus:ring-primary"
+              placeholder="Masukkan password"
+              className="w-full px-3 py-2.5 rounded-lg border border-border bg-background text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+              required
             />
             {error && <p className="text-destructive text-xs mt-1">{error}</p>}
           </div>
           <button
             type="submit"
-            className="w-full bg-primary text-primary-foreground py-2.5 rounded-lg font-medium hover:bg-primary/90 transition-colors"
+            disabled={isSettingUp}
+            className="w-full bg-primary text-primary-foreground py-2.5 rounded-lg font-medium hover:bg-primary/90 transition-colors disabled:opacity-50"
           >
-            Masuk
+            {showSetup ? (isSettingUp ? "Membuat admin..." : "Buat Admin & Login") : "Masuk"}
           </button>
         </form>
-        <p className="text-xs text-muted-foreground text-center mt-4">
-          Hint: admin123
-        </p>
+
+        {!showSetup && !setupDone && (
+          <button
+            onClick={() => setShowSetup(true)}
+            className="w-full text-xs text-muted-foreground text-center mt-4 hover:text-foreground transition-colors"
+          >
+            Belum punya akun admin? Setup di sini
+          </button>
+        )}
+        {showSetup && (
+          <button
+            onClick={() => setShowSetup(false)}
+            className="w-full text-xs text-muted-foreground text-center mt-4 hover:text-foreground transition-colors"
+          >
+            Sudah punya akun? Login di sini
+          </button>
+        )}
       </div>
     </div>
   );
