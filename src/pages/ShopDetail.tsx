@@ -22,7 +22,7 @@ const ShopDetail = () => {
     { key: "fotokopi", label: "Fotokopi", icon: Copy, active: shop.services.fotokopi },
     { key: "printWarna", label: "Print Warna", icon: Printer, active: shop.services.printWarna },
     { key: "jilid", label: "Jilid", icon: BookOpen, active: shop.services.jilid },
-    { key: "laminating", label: "Laminating", icon: Shield, active: shop.services.laminating },
+    { key: "laminating", label: "Foto Copy Warna", icon: Shield, active: shop.services.laminating },
   ];
 
   return (

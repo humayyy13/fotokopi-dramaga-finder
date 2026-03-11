@@ -27,7 +27,7 @@ const ShopCard = ({ shop }: { shop: Shop }) => (
       <div className="flex flex-wrap gap-1 mt-3">
         {shop.services.printWarna && <span className="text-xs bg-primary/10 text-primary px-2 py-0.5 rounded-full">Print Warna</span>}
         {shop.services.jilid && <span className="text-xs bg-primary/10 text-primary px-2 py-0.5 rounded-full">Jilid</span>}
-        {shop.services.laminating && <span className="text-xs bg-primary/10 text-primary px-2 py-0.5 rounded-full">Laminating</span>}
+        {shop.services.laminating && <span className="text-xs bg-primary/10 text-primary px-2 py-0.5 rounded-full">Foto Copy Warna</span>}
       </div>
     </div>
   </Link>

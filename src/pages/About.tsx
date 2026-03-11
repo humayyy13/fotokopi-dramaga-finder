@@ -68,7 +68,7 @@ const About = () => (
             SIG Fotokopi Dramaga adalah aplikasi web berbasis Sistem Informasi Geografis (SIG) yang dirancang untuk memetakan dan menampilkan lokasi jasa fotokopi di wilayah Dramaga, Kabupaten Bogor. Aplikasi ini memanfaatkan teknologi peta interaktif untuk memberikan informasi yang akurat dan mudah diakses.
           </p>
           <p className="text-slate-600 text-lg leading-relaxed">
-            Dengan fitur pencarian dan filter yang lengkap, pengguna dapat dengan mudah menemukan toko fotokopi terdekat berdasarkan layanan yang dibutuhkan, seperti print warna, jilid, dan laminating. Sistem ini juga menyediakan informasi jam operasional dan rating dari setiap toko.
+            Dengan fitur pencarian dan filter yang lengkap, pengguna dapat dengan mudah menemukan toko fotokopi terdekat berdasarkan layanan yang dibutuhkan, seperti print warna, jilid, dan foto copy warna. Sistem ini juga menyediakan informasi jam operasional dan rating dari setiap toko.
           </p>
         </div>
       </div>
