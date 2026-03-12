@@ -1,7 +1,7 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "@/context/AuthContext";
-import { Lock, Eye, EyeOff } from "lucide-react";
+import { Lock, Eye, EyeOff, ArrowLeft } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 
 const AdminLogin = () => {
@@ -12,8 +12,15 @@ const AdminLogin = () => {
   const [isSettingUp, setIsSettingUp] = useState(false);
   const [showSetup, setShowSetup] = useState(false);
   const [setupDone, setSetupDone] = useState(false);
-  const { login } = useAuth();
+  const { login, isAdmin, loading } = useAuth();
   const navigate = useNavigate();
+
+  // Redirect if already logged in as admin
+  useEffect(() => {
+    if (!loading && isAdmin) {
+      navigate("/admin");
+    }
+  }, [isAdmin, loading, navigate]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -53,7 +60,15 @@ const AdminLogin = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 bg-background">
+    <div className="min-h-screen flex items-center justify-center px-4 bg-background relative">
+      <Link
+        to="/"
+        className="absolute top-6 left-6 flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
+      >
+        <ArrowLeft className="h-5 w-5" />
+        <span className="font-medium">Kembali ke Beranda</span>
+      </Link>
+      
       <div className="bg-card rounded-xl p-8 card-shadow w-full max-w-sm">
         <div className="text-center mb-6">
           <div className="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-primary/10 text-primary mb-3">

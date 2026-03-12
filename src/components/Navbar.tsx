@@ -33,12 +33,6 @@ const Navbar = () => {
               {item.label}
             </Link>
           ))}
-          <Link
-            to="/admin"
-            className="ml-2 px-6 py-2 rounded-full text-sm font-semibold bg-primary text-primary-foreground hover:opacity-90 transition-opacity shadow-sm"
-          >
-            Admin
-          </Link>
         </div>
 
         {/* Mobile toggle */}
@@ -63,13 +57,6 @@ const Navbar = () => {
               {item.label}
             </Link>
           ))}
-          <Link
-            to="/admin"
-            onClick={() => setOpen(false)}
-            className="block px-4 py-2.5 mt-2 rounded-lg text-sm font-semibold text-center bg-primary text-primary-foreground hover:opacity-90 transition-opacity"
-          >
-            Admin
-          </Link>
         </div>
       )}
     </nav>
