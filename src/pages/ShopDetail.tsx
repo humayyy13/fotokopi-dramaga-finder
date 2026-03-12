@@ -1,6 +1,6 @@
 import { useParams, Link } from "react-router-dom";
 import { useShops } from "@/context/ShopContext";
-import { Star, Clock, MapPin, ArrowLeft, Printer, BookOpen, Shield, Copy } from "lucide-react";
+import { Star, Clock, MapPin, ArrowLeft, Printer, BookOpen, Shield, Copy, ExternalLink, Navigation } from "lucide-react";
 
 const ShopDetail = () => {
   const { id } = useParams();
@@ -24,6 +24,8 @@ const ShopDetail = () => {
     { key: "jilid", label: "Jilid", icon: BookOpen, active: shop.services.jilid },
     { key: "laminating", label: "Foto Copy Warna", icon: Shield, active: shop.services.laminating },
   ];
+
+  const googleMapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${shop.lat},${shop.lng}`;
 
   return (
     <div className="min-h-screen py-8 px-4">
@@ -62,6 +64,27 @@ const ShopDetail = () => {
                 <MapPin className="h-4 w-4 text-primary" />
                 <span>{shop.address}</span>
               </div>
+            </div>
+
+            {/* Action Buttons */}
+            <div className="flex flex-col sm:flex-row gap-3 mb-6">
+              <a
+                href={googleMapsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-200 shadow-md hover:shadow-lg hover:-translate-y-0.5"
+              >
+                <Navigation className="h-4 w-4" />
+                Buka Google Maps
+                <ExternalLink className="h-3.5 w-3.5" />
+              </a>
+              <Link
+                to="/map"
+                className="inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 text-primary-foreground px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-200 shadow-md hover:shadow-lg hover:-translate-y-0.5"
+              >
+                <MapPin className="h-4 w-4" />
+                Lihat di Peta
+              </Link>
             </div>
 
             {/* Service badges */}

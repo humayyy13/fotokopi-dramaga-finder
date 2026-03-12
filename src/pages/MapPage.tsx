@@ -2,7 +2,7 @@ import { useState, useMemo, useCallback, useEffect } from "react";
 import { useShops } from "@/context/ShopContext";
 import MapView from "@/components/MapView";
 import { useGeolocation } from "@/hooks/useGeolocation";
-import { haversineDistance, formatDistance, isWithinRadius } from "@/lib/geo-utils";
+import { haversineDistance, formatDistance, isWithinRadius, estimateTime } from "@/lib/geo-utils";
 import {
   Star,
   Search,
@@ -118,9 +118,9 @@ const MapPage = () => {
   }
 
   return (
-    <div className="min-h-screen flex flex-col lg:flex-row bg-background">
+    <div className="h-[calc(100vh-64px)] flex flex-col lg:flex-row bg-background overflow-hidden">
       {/* Sidebar */}
-      <aside className="w-full lg:w-96 bg-card border-r flex flex-col h-[50vh] lg:h-[calc(100vh-64px)] shadow-sm z-10">
+      <aside className="w-full lg:w-96 bg-card border-r flex flex-col h-[35vh] lg:h-full shadow-sm z-10 shrink-0">
 
         {/* Search Bar */}
         <div className="p-4 border-b bg-white border-border/50 sticky top-0 z-20">
@@ -248,8 +248,8 @@ const MapPage = () => {
 
           {/* ── Routing Active ── */}
           {routeToShop && (
-            <div className="mb-4 p-3 bg-blue-50/50 rounded-xl border border-blue-100">
-              <div className="flex items-center justify-between mb-1">
+            <div className="mb-4 p-3 bg-blue-50/50 rounded-xl border border-blue-100 space-y-2">
+              <div className="flex items-center justify-between">
                 <h4 className="text-sm font-bold text-blue-700 flex items-center gap-1.5">
                   <Navigation className="h-4 w-4" />
                   Navigasi Aktif
@@ -269,6 +269,30 @@ const MapPage = () => {
                   </span>
                 )}
               </p>
+              {userLocation && (() => {
+                const dist = haversineDistance(userLocation.lat, userLocation.lng, routeToShop.lat, routeToShop.lng);
+                const time = estimateTime(dist);
+                return (
+                  <div className="flex gap-2">
+                    <div className="flex-1 bg-blue-100/60 rounded-lg px-2.5 py-1.5 text-center">
+                      <p className="text-[10px] text-blue-500 font-medium">🚶 Jalan Kaki</p>
+                      <p className="text-xs font-bold text-blue-700">{time.walking}</p>
+                    </div>
+                    <div className="flex-1 bg-blue-100/60 rounded-lg px-2.5 py-1.5 text-center">
+                      <p className="text-[10px] text-blue-500 font-medium">🏍️ Motor</p>
+                      <p className="text-xs font-bold text-blue-700">{time.motorcycle}</p>
+                    </div>
+                  </div>
+                );
+              })()}
+              <a
+                href={`https://www.google.com/maps/dir/?api=1&destination=${routeToShop.lat},${routeToShop.lng}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-1.5 w-full py-2 bg-blue-500 hover:bg-blue-600 text-white text-xs font-semibold rounded-lg transition-colors"
+              >
+                🗺️ Buka Google Maps
+              </a>
             </div>
           )}
 
@@ -359,7 +383,7 @@ const MapPage = () => {
       </aside>
 
       {/* Map */}
-      <div className="flex-1 w-full h-[50vh] lg:h-[calc(100vh-64px)] relative z-0">
+      <div className="flex-1 w-full h-[65vh] lg:h-full relative z-0">
         <MapView
           shops={filtered}
           allShops={shops}

@@ -51,9 +51,34 @@ export function sortByDistance(
     .sort((a, b) => a.distance - b.distance);
 }
 
+
 /**
- * Check if a shop is within a given radius (in meters) from a center point.
+ * Estimate travel time based on distance.
+ * Returns formatted strings for walking (~5 km/h) and motorcycle (~30 km/h).
  */
+export function estimateTime(meters: number): { walking: string; motorcycle: string } {
+  const walkingSpeed = 5; // km/h
+  const motorcycleSpeed = 30; // km/h
+
+  const km = meters / 1000;
+
+  const walkMinutes = Math.round((km / walkingSpeed) * 60);
+  const motorMinutes = Math.round((km / motorcycleSpeed) * 60);
+
+  const formatMinutes = (mins: number): string => {
+    if (mins < 1) return "< 1 menit";
+    if (mins < 60) return `${mins} menit`;
+    const h = Math.floor(mins / 60);
+    const m = mins % 60;
+    return m > 0 ? `${h} jam ${m} menit` : `${h} jam`;
+  };
+
+  return {
+    walking: formatMinutes(walkMinutes),
+    motorcycle: formatMinutes(motorMinutes),
+  };
+}
+
 export function isWithinRadius(
   shopLat: number,
   shopLng: number,

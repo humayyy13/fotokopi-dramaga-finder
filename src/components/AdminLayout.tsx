@@ -1,6 +1,6 @@
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import { useAuth } from "@/context/AuthContext";
-import { LayoutDashboard, List, PlusCircle, LogOut, MapPin } from "lucide-react";
+import { LayoutDashboard, List, PlusCircle, LogOut, MapPin, Map } from "lucide-react";
 
 const AdminLayout = () => {
   const { logout } = useAuth();
@@ -15,6 +15,7 @@ const AdminLayout = () => {
     { to: "/admin", label: "Dashboard", icon: LayoutDashboard },
     { to: "/admin/shops", label: "Daftar Toko", icon: List },
     { to: "/admin/shops/create", label: "Tambah Toko", icon: PlusCircle },
+    { to: "/admin/map", label: "Peta Toko", icon: Map },
   ];
 
   return (

@@ -17,6 +17,7 @@ import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminShopList from "./pages/admin/AdminShopList";
 import AdminShopCreate from "./pages/admin/AdminShopCreate";
 import AdminShopEdit from "./pages/admin/AdminShopEdit";
+import AdminMap from "./pages/admin/AdminMap";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -57,6 +58,7 @@ const App = () => (
                 <Route path="shops" element={<AdminShopList />} />
                 <Route path="shops/create" element={<AdminShopCreate />} />
                 <Route path="shops/edit/:id" element={<AdminShopEdit />} />
+                <Route path="map" element={<AdminMap />} />
               </Route>
 
               <Route path="*" element={<NotFound />} />
