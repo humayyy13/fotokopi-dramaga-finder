@@ -1,4 +1,5 @@
-import { Star, MapPin, MessageSquare } from "lucide-react";
+import { Star, MapPin } from "lucide-react";
+import { WhatsAppIcon } from "@/components/WhatsAppIcon";
 import { Link } from "react-router-dom";
 import { Shop } from "@/data/shops";
 import { formatDistance, getWaLink } from "@/lib/geo-utils";
@@ -39,10 +40,11 @@ const ShopCard = ({ shop, distance }: ShopCardProps) => (
             target="_blank"
             rel="noopener noreferrer"
             onClick={(e) => e.stopPropagation()}
-            className="ml-auto inline-flex items-center justify-center bg-[#25D366] hover:bg-[#128C7E] text-white p-1.5 rounded-md transition-colors"
+            className="ml-auto inline-flex items-center justify-center bg-[#25D366] hover:bg-[#128C7E] text-white px-3 py-1.5 rounded-md transition-colors gap-1.5 shadow-sm"
             title="Chat WhatsApp"
           >
-            <MessageSquare className="h-3.5 w-3.5" />
+            <WhatsAppIcon className="h-4 w-4" />
+            <span className="text-xs font-semibold">Chat</span>
           </a>
         )}
       </div>

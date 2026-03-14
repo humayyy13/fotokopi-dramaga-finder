@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useShops } from "@/context/ShopContext";
 import { Pencil, Trash2, Plus, Star, Search, Download, ArrowUpDown, Filter } from "lucide-react";
 import { useState, useMemo } from "react";
+import { WhatsAppIcon } from "@/components/WhatsAppIcon";
 
 type SortKey = "name" | "rating" | "hours";
 type SortDir = "asc" | "desc";
@@ -262,7 +263,9 @@ const AdminShopList = () => {
                         <div className="flex items-center gap-2">
                           {shop.name}
                           {shop.whatsapp && (
-                            <span className="text-[10px] bg-green-100 text-green-700 px-1.5 py-0.5 rounded font-semibold" title={shop.whatsapp}>WA</span>
+                            <span className="inline-flex items-center justify-center bg-[#25D366] text-white p-1 rounded-md" title={shop.whatsapp}>
+                              <WhatsAppIcon className="h-3 w-3" />
+                            </span>
                           )}
                         </div>
                       </td>

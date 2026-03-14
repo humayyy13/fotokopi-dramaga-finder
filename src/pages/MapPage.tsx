@@ -14,8 +14,8 @@ import {
   X,
   Loader2,
   Compass,
-  MessageSquare,
 } from "lucide-react";
+import { WhatsAppIcon } from "@/components/WhatsAppIcon";
 
 const MapPage = () => {
   const { shops, loading, getShop } = useShops();
@@ -380,10 +380,10 @@ const MapPage = () => {
                           target="_blank"
                           rel="noopener noreferrer"
                           onClick={(e) => e.stopPropagation()}
-                          className={`flex items-center gap-1 bg-[#25D366] hover:bg-[#128C7E] text-white text-[10px] font-semibold px-2 py-1 rounded-md transition-colors ${!userLocation ? "ml-auto" : ""}`}
+                          className={`flex items-center gap-1.5 bg-[#25D366] hover:bg-[#128C7E] text-white text-xs font-semibold px-2.5 py-1.5 rounded-lg transition-colors shadow-sm hover:shadow-md ${!userLocation ? "ml-auto" : ""}`}
                           title="Chat WhatsApp"
                         >
-                          <MessageSquare className="h-2.5 w-2.5" />
+                          <WhatsAppIcon className="h-4 w-4" />
                           Chat
                         </a>
                       )}

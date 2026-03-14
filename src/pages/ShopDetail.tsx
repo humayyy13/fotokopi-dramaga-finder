@@ -1,7 +1,8 @@
 import { useParams, Link } from "react-router-dom";
 import { useShops } from "@/context/ShopContext";
 import { getWaLink } from "@/lib/geo-utils";
-import { Star, Clock, MapPin, ArrowLeft, Printer, BookOpen, Shield, Copy, ExternalLink, Navigation, MessageSquare } from "lucide-react";
+import { Star, Clock, MapPin, ArrowLeft, Printer, BookOpen, Shield, Copy, ExternalLink, Navigation } from "lucide-react";
+import { WhatsAppIcon } from "@/components/WhatsAppIcon";
 
 const ShopDetail = () => {
   const { id } = useParams();
@@ -74,7 +75,7 @@ const ShopDetail = () => {
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#128C7E] text-white px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-200 shadow-md hover:shadow-lg hover:-translate-y-0.5"
                 >
-                  <MessageSquare className="h-4 w-4" />
+                  <WhatsAppIcon className="h-5 w-5" />
                   Chat WhatsApp
                 </a>
               )}
