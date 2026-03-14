@@ -97,6 +97,57 @@
   .card-shadow-hover {
     box-shadow: var(--card-shadow-hover);
   }
+  .animate-wiggle {
+    animation: wiggle 1s ease-in-out infinite;
+  }
+  .animate-bounce-soft {
+    animation: bounce-soft 2s infinite ease-in-out;
+  }
+  .animate-float-fast {
+    animation: float 2.5s ease-in-out infinite;
+  }
+}
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(-3deg); }
+  50% { transform: rotate(3deg); }
+}
+
+@keyframes bounce-soft {
+  0%, 100% { transform: translateY(-5%); }
+  50% { transform: translateY(0); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* Ink splash effect for navigation */
+.nav-ink-splash {
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-ink-splash::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background-color: var(--primary);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.4s ease-out, height 0.4s ease-out;
+  z-index: -1;
+  opacity: 0.1;
+}
+
+.nav-ink-splash:hover::after {
+  width: 200%;
+  height: 200%;
+  opacity: 0.2;
 }
 
 /* Leaflet overrides */

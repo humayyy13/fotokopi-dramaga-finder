@@ -76,11 +76,12 @@ const AdminShopList = () => {
       "Rating",
       "Jam Buka",
       "Jam Tutup",
-      "Fotokopi",
+      "Photo Copy",
       "Print Warna",
       "Jilid",
       "Foto Copy Warna",
       "Deskripsi",
+      "WhatsApp",
     ];
 
     const rows = filtered.map((s) => [
@@ -96,6 +97,7 @@ const AdminShopList = () => {
       s.services.jilid ? "Ya" : "Tidak",
       s.services.laminating ? "Ya" : "Tidak",
       `"${(s.description || "").replace(/"/g, '""')}"`,
+      `"${s.whatsapp || ""}"`,
     ]);
 
     const csv = [headers.join(","), ...rows.map((r) => r.join(","))].join("\n");
@@ -103,7 +105,7 @@ const AdminShopList = () => {
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `data-toko-fotokopi-${new Date().toISOString().slice(0, 10)}.csv`;
+    a.download = `data-toko-photo-copy-${new Date().toISOString().slice(0, 10)}.csv`;
     a.click();
     URL.revokeObjectURL(url);
   };
@@ -188,7 +190,7 @@ const AdminShopList = () => {
           <div className="flex flex-wrap gap-3 pt-1">
             {(
               [
-                ["fotokopi", "Fotokopi"],
+                ["fotokopi", "Photo Copy"],
                 ["printWarna", "Print Warna"],
                 ["jilid", "Jilid"],
                 ["laminating", "Foto Copy Warna"],
@@ -258,7 +260,14 @@ const AdminShopList = () => {
 
                   return (
                     <tr key={shop.id} className="border-b last:border-0 hover:bg-secondary/30 transition-colors">
-                      <td className="px-4 py-3 font-medium">{shop.name}</td>
+                      <td className="px-4 py-3 font-medium">
+                        <div className="flex items-center gap-2">
+                          {shop.name}
+                          {shop.whatsapp && (
+                            <span className="text-[10px] bg-green-100 text-green-700 px-1.5 py-0.5 rounded font-semibold" title={shop.whatsapp}>WA</span>
+                          )}
+                        </div>
+                      </td>
                       <td className="px-4 py-3 text-muted-foreground hidden md:table-cell">{shop.address}</td>
                       <td className="px-4 py-3">
                         <div className="flex items-center gap-1">

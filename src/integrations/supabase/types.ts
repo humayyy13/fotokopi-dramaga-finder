@@ -32,6 +32,7 @@ export type Database = {
           open_time: string
           print_warna: boolean
           rating: number
+          whatsapp: string | null
         }
         Insert: {
           address: string
@@ -50,6 +51,7 @@ export type Database = {
           open_time?: string
           print_warna?: boolean
           rating?: number
+          whatsapp?: string | null
         }
         Update: {
           address?: string
@@ -68,6 +70,7 @@ export type Database = {
           open_time?: string
           print_warna?: boolean
           rating?: number
+          whatsapp?: string | null
         }
         Relationships: []
       }

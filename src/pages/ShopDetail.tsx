@@ -1,6 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import { useShops } from "@/context/ShopContext";
-import { Star, Clock, MapPin, ArrowLeft, Printer, BookOpen, Shield, Copy, ExternalLink, Navigation } from "lucide-react";
+import { getWaLink } from "@/lib/geo-utils";
+import { Star, Clock, MapPin, ArrowLeft, Printer, BookOpen, Shield, Copy, ExternalLink, Navigation, MessageSquare } from "lucide-react";
 
 const ShopDetail = () => {
   const { id } = useParams();
@@ -19,7 +20,7 @@ const ShopDetail = () => {
   }
 
   const serviceBadges = [
-    { key: "fotokopi", label: "Fotokopi", icon: Copy, active: shop.services.fotokopi },
+    { key: "fotokopi", label: "Photo Copy", icon: Copy, active: shop.services.fotokopi },
     { key: "printWarna", label: "Print Warna", icon: Printer, active: shop.services.printWarna },
     { key: "jilid", label: "Jilid", icon: BookOpen, active: shop.services.jilid },
     { key: "laminating", label: "Foto Copy Warna", icon: Shield, active: shop.services.laminating },
@@ -68,6 +69,17 @@ const ShopDetail = () => {
 
             {/* Action Buttons */}
             <div className="flex flex-col sm:flex-row gap-3 mb-6">
+              {shop.whatsapp && (
+                <a
+                  href={getWaLink(shop.whatsapp, shop.name)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#128C7E] text-white px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-200 shadow-md hover:shadow-lg hover:-translate-y-0.5"
+                >
+                  <MessageSquare className="h-4 w-4" />
+                  Chat WhatsApp
+                </a>
+              )}
               <a
                 href={googleMapsUrl}
                 target="_blank"

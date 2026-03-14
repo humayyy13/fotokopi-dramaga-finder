@@ -79,6 +79,16 @@ export function estimateTime(meters: number): { walking: string; motorcycle: str
   };
 }
 
+export const getWaLink = (whatsapp: string | undefined | null, shopName: string) => {
+  if (!whatsapp) return "";
+  let cleanWa = whatsapp.replace(/\D/g, "");
+  if (cleanWa.startsWith("0")) {
+    cleanWa = "62" + cleanWa.slice(1);
+  }
+  const message = encodeURIComponent(`Halo, saya melihat info toko ${shopName} di web SIG Photo Copy Dramaga. Saya mau tanya...`);
+  return `https://wa.me/${cleanWa}?text=${message}`;
+};
+
 export function isWithinRadius(
   shopLat: number,
   shopLng: number,

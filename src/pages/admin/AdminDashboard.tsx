@@ -37,7 +37,7 @@ const AdminDashboard = () => {
 
   // ── Pie Chart data: distribusi layanan ──
   const serviceData = [
-    { name: "Fotokopi", value: shops.filter((s) => s.services.fotokopi).length },
+    { name: "Photo Copy", value: shops.filter((s) => s.services.fotokopi).length },
     { name: "Print Warna", value: shops.filter((s) => s.services.printWarna).length },
     { name: "Jilid", value: shops.filter((s) => s.services.jilid).length },
     { name: "Foto Copy Warna", value: shops.filter((s) => s.services.laminating).length },
@@ -58,7 +58,18 @@ const AdminDashboard = () => {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold mb-6">Dashboard</h1>
+      <div className="flex items-center gap-4 mb-6">
+        <div className="w-12 h-12 bg-[#f5ebd6] rounded-xl flex items-center justify-center shadow-sm border border-border/50 animate-bounce-soft">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="white" className="animate-wiggle" stroke="#333333" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/>
+            <polyline points="14 2 14 8 20 8"/>
+            <circle cx="9" cy="13" r="1.5" fill="#333333" stroke="none"/>
+            <circle cx="15" cy="13" r="1.5" fill="#333333" stroke="none"/>
+            <path d="M10.5 16c1 1.5 2 1.5 3 0" strokeWidth="1.5"/>
+          </svg>
+        </div>
+        <h1 className="text-2xl font-bold">Dashboard</h1>
+      </div>
 
       {/* ── Stat Cards ── */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5 mb-8 mt-2">

@@ -42,17 +42,21 @@ const AdminMap = () => {
     });
 
     const customIcon = L.divIcon({
-      html: `<div style="background:#16a34a;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:2.5px solid white;box-shadow:0 2px 8px rgba(0,0,0,0.3);">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="1">
-          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-          <circle cx="12" cy="10" r="3" fill="#16a34a" stroke="white"/>
+      html: `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 130" width="30" height="40" style="filter: drop-shadow(0px 4px 4px rgba(0,0,0,0.25)); transform-origin: bottom center;">
+          <path fill="#1a4d33" d="M50 0C22.4 0 0 22.4 0 50c0 36.6 46.5 77.2 46.5 77.2.9.8 2 .8 2.9 0C49.5 127.2 100 86.6 100 50 100 22.4 77.6 0 50 0z"/>
+          <circle cx="50" cy="45" r="28" fill="#f5ebd6" />
+          <circle cx="42" cy="42" r="3" fill="#333333" />
+          <circle cx="58" cy="42" r="3" fill="#333333" />
+          <path d="M46 50c2 2 6 2 8 0" fill="none" stroke="#333333" stroke-width="2.5" stroke-linecap="round" />
         </svg>
-      </div>`,
-      className: "",
-      iconSize: [28, 28],
-      iconAnchor: [14, 28],
-      popupAnchor: [0, -28],
+      `,
+      className: "custom-leaflet-marker",
+      iconSize: [30, 40],
+      iconAnchor: [15, 40],
+      popupAnchor: [0, -40],
     });
+
 
     const bounds: [number, number][] = [];
 
@@ -60,7 +64,7 @@ const AdminMap = () => {
       bounds.push([shop.lat, shop.lng]);
 
       const services = [];
-      if (shop.services.fotokopi) services.push("Fotokopi");
+      if (shop.services.fotokopi) services.push("Photo Copy");
       if (shop.services.printWarna) services.push("Print Warna");
       if (shop.services.jilid) services.push("Jilid");
       if (shop.services.laminating) services.push("Foto Copy Warna");

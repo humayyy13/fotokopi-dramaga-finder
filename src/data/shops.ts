@@ -16,6 +16,7 @@ export interface Shop {
   };
   image: string;
   description: string;
+  whatsapp?: string;
 }
 
 // Helper to convert DB row to Shop
@@ -38,6 +39,7 @@ export function dbRowToShop(row: any): Shop {
     },
     image: row.image,
     description: row.description,
+    whatsapp: row.whatsapp || "",
   };
 }
 
@@ -59,5 +61,6 @@ export function shopToDbRow(shop: Shop) {
     fotokopi: shop.services.fotokopi,
     image: shop.image,
     description: shop.description,
+    whatsapp: shop.whatsapp || null,
   };
 }

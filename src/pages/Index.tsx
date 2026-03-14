@@ -54,10 +54,10 @@ const Index = () => {
             {/* Left Column: Text & Search */}
             <div className="text-center lg:text-left order-2 lg:order-1 pt-4 lg:pt-0">
               <h1 className="text-4xl md:text-5xl lg:text-[3.5rem] font-extrabold mb-6 leading-[1.15] tracking-tight text-foreground animate-fade-in">
-                Temukan Jasa Fotokopi Terdekat di Dramaga
+                Temukan Jasa Photo Copy Terdekat di Dramaga
               </h1>
               <p className="text-muted-foreground text-lg md:text-xl mb-10 animate-fade-in max-w-2xl mx-auto lg:mx-0 leading-relaxed" style={{ animationDelay: "0.1s" }}>
-                Sistem Informasi Geografis untuk pencarian lokasi fotokopi di wilayah Dramaga, Bogor dengan cepat dan mudah.
+                Sistem Informasi Geografis untuk pencarian lokasi photo copy di wilayah Dramaga, Bogor dengan cepat dan mudah.
               </p>
 
               {/* Search */}
@@ -66,7 +66,7 @@ const Index = () => {
                   <Search className="absolute left-6 text-muted-foreground h-6 w-6" />
                   <input
                     type="text"
-                    placeholder="Cari nama atau alamat fotokopi..."
+                    placeholder="Cari nama atau alamat photo copy..."
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
                     className="w-full pl-16 pr-4 h-full bg-transparent border-none text-foreground text-lg focus:outline-none focus:ring-0 placeholder:text-muted-foreground/70"
@@ -118,7 +118,7 @@ const Index = () => {
       {/* Shop List */}
       <section id="shop-list" className="py-16 px-4 bg-secondary/30">
         <div className="container mx-auto">
-          <h2 className="text-2xl font-bold text-center mb-2">Daftar Fotokopi</h2>
+          <h2 className="text-2xl font-bold text-center mb-2">Daftar Photo Copy</h2>
           <p className="text-muted-foreground text-center mb-10">
             {filtered.length} toko ditemukan{search && ` untuk "${search}"`}
             {sortNearest && lat != null && " — diurutkan berdasarkan jarak terdekat"}

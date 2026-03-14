@@ -22,6 +22,7 @@ const ShopForm = ({ initial, onSubmit, title }: ShopFormProps) => {
     services: initial?.services || { printWarna: false, jilid: false, laminating: false, fotokopi: true },
     image: initial?.image || "",
     description: initial?.description || "",
+    whatsapp: initial?.whatsapp || "",
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
 
@@ -119,7 +120,7 @@ const ShopForm = ({ initial, onSubmit, title }: ShopFormProps) => {
                 <input type="checkbox" checked={form.services[key]}
                   onChange={(e) => setForm((f) => ({ ...f, services: { ...f.services, [key]: e.target.checked } }))}
                   className="rounded" />
-                {key === "printWarna" ? "Print Warna" : key === "laminating" ? "Foto Copy Warna" : key.charAt(0).toUpperCase() + key.slice(1)}
+                {key === "printWarna" ? "Print Warna" : key === "laminating" ? "Foto Copy Warna" : key === "fotokopi" ? "Photo Copy" : key.charAt(0).toUpperCase() + key.slice(1)}
               </label>
             ))}
           </div>
@@ -133,9 +134,9 @@ const ShopForm = ({ initial, onSubmit, title }: ShopFormProps) => {
         </div>
 
         <div>
-          <label className="text-sm font-medium mb-1 block">Deskripsi</label>
-          <textarea value={form.description} onChange={(e) => update("description", e.target.value)} rows={3}
-            className="w-full px-3 py-2 rounded-lg border border-border bg-background text-sm focus:outline-none focus:ring-2 focus:ring-primary resize-none" />
+          <label className="text-sm font-medium mb-1 block">Nomor WhatsApp (Cth: 6281234...)</label>
+          <input type="text" value={form.whatsapp || ""} onChange={(e) => update("whatsapp", e.target.value)} placeholder="628..."
+            className="w-full px-3 py-2 rounded-lg border border-border bg-background text-sm focus:outline-none focus:ring-2 focus:ring-primary" />
         </div>
 
         <div className="flex gap-3 pt-2">

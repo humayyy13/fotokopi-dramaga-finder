@@ -2,7 +2,7 @@ import { useState, useMemo, useCallback, useEffect } from "react";
 import { useShops } from "@/context/ShopContext";
 import MapView from "@/components/MapView";
 import { useGeolocation } from "@/hooks/useGeolocation";
-import { haversineDistance, formatDistance, isWithinRadius, estimateTime } from "@/lib/geo-utils";
+import { haversineDistance, formatDistance, isWithinRadius, estimateTime, getWaLink } from "@/lib/geo-utils";
 import {
   Star,
   Search,
@@ -14,6 +14,7 @@ import {
   X,
   Loader2,
   Compass,
+  MessageSquare,
 } from "lucide-react";
 
 const MapPage = () => {
@@ -128,7 +129,7 @@ const MapPage = () => {
             <Search className="absolute left-4 text-muted-foreground h-4 w-4" />
             <input
               type="text"
-              placeholder="Cari fotokopi atau alamat..."
+              placeholder="Cari photo copy atau alamat..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               className="w-full pl-10 pr-3 py-2 bg-transparent border-none text-foreground text-sm focus:outline-none focus:ring-0 placeholder:text-muted-foreground/70"
@@ -372,6 +373,19 @@ const MapPage = () => {
                           <Navigation className="h-2.5 w-2.5" />
                           Navigasi
                         </button>
+                      )}
+                      {shop.whatsapp && (
+                        <a
+                          href={getWaLink(shop.whatsapp, shop.name)}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                          className={`flex items-center gap-1 bg-[#25D366] hover:bg-[#128C7E] text-white text-[10px] font-semibold px-2 py-1 rounded-md transition-colors ${!userLocation ? "ml-auto" : ""}`}
+                          title="Chat WhatsApp"
+                        >
+                          <MessageSquare className="h-2.5 w-2.5" />
+                          Chat
+                        </a>
                       )}
                     </div>
                   </button>

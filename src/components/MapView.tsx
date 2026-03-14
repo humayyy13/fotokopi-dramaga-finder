@@ -26,8 +26,12 @@ const createCustomIcon = (isHighlighted: boolean, inBuffer?: boolean) => {
   const scale = isHighlighted ? 1.2 : 1;
 
   const svg = `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" width="${30 * scale}" height="${40 * scale}" style="filter: drop-shadow(0px 4px 4px rgba(0,0,0,0.25)); transform-origin: bottom center;">
-      <path fill="${color}" d="M172.268 501.67C26.97 291.031 0 269.413 0 192 0 85.961 85.961 0 192 0s192 85.961 192 192c0 77.413-26.97 99.031-172.268 309.67-9.535 13.774-29.93 13.773-39.464 0zM192 272c44.183 0 80-35.817 80-80s-35.817-80-80-80-80 35.817-80 80 35.817 80 80 80z"/>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 130" width="${30 * scale}" height="${40 * scale}" style="filter: drop-shadow(0px 4px 4px rgba(0,0,0,0.25)); transform-origin: bottom center;">
+      <path fill="${color}" d="M50 0C22.4 0 0 22.4 0 50c0 36.6 46.5 77.2 46.5 77.2.9.8 2 .8 2.9 0C49.5 127.2 100 86.6 100 50 100 22.4 77.6 0 50 0z"/>
+      <circle cx="50" cy="45" r="28" fill="#f5ebd6" />
+      <circle cx="42" cy="42" r="3" fill="#333333" />
+      <circle cx="58" cy="42" r="3" fill="#333333" />
+      <path d="M46 50c2 2 6 2 8 0" fill="none" stroke="#333333" stroke-width="2.5" stroke-linecap="round" />
     </svg>
   `;
 

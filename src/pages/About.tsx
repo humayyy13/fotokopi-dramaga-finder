@@ -33,9 +33,9 @@ const About = () => (
   <div className="min-h-screen">
     <section className="bg-background pt-24 pb-16 px-4 relative">
       <div className="container mx-auto text-center max-w-3xl relative z-10">
-        <h1 className="text-4xl md:text-5xl font-extrabold mb-6 tracking-tight text-foreground animate-fade-in">Tentang SIG Fotokopi Dramaga</h1>
+        <h1 className="text-4xl md:text-5xl font-extrabold mb-6 tracking-tight text-foreground animate-fade-in">Tentang SIG Photo Copy Dramaga</h1>
         <p className="text-muted-foreground text-lg md:text-xl leading-relaxed animate-fade-in" style={{ animationDelay: "0.1s" }}>
-          Sistem Informasi Geografis berbasis web untuk membantu masyarakat menemukan jasa fotokopi di wilayah Dramaga, Bogor.
+          Sistem Informasi Geografis berbasis web untuk membantu masyarakat menemukan jasa photo copy di wilayah Dramaga, Bogor.
         </p>
       </div>
     </section>
@@ -44,7 +44,7 @@ const About = () => (
       <div className="container mx-auto max-w-5xl">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
           {[
-            { icon: LocationIcon, title: "Lokasi Akurat", desc: "Pemetaan lokasi fotokopi dengan koordinat yang tepat menggunakan teknologi GIS.", delay: "0s", bg: "bg-blue-50" },
+            { icon: LocationIcon, title: "Lokasi Akurat", desc: "Pemetaan lokasi photo copy dengan koordinat yang tepat menggunakan teknologi GIS.", delay: "0s", bg: "bg-blue-50" },
             { icon: SearchIcon, title: "Pencarian Mudah", desc: "Filter berdasarkan layanan, jam buka, dan lokasi terdekat dengan cepat.", delay: "0.2s", bg: "bg-purple-50" },
             { icon: UsersIcon, title: "Untuk Semua", desc: "Didesain untuk mahasiswa, dosen, dan masyarakat umum di wilayah Dramaga.", delay: "0.4s", bg: "bg-teal-50" },
           ].map((item) => (
@@ -65,10 +65,10 @@ const About = () => (
         <div className="bg-white rounded-3xl p-8 md:p-12 shadow-sm border border-border/30 max-w-4xl mx-auto">
           <h2 className="text-2xl font-bold mb-5 text-foreground">Deskripsi Sistem</h2>
           <p className="text-slate-600 text-lg leading-relaxed mb-5">
-            SIG Fotokopi Dramaga adalah aplikasi web berbasis Sistem Informasi Geografis (SIG) yang dirancang untuk memetakan dan menampilkan lokasi jasa fotokopi di wilayah Dramaga, Kabupaten Bogor. Aplikasi ini memanfaatkan teknologi peta interaktif untuk memberikan informasi yang akurat dan mudah diakses.
+            SIG Photo Copy Dramaga adalah aplikasi web berbasis Sistem Informasi Geografis (SIG) yang dirancang untuk memetakan dan menampilkan lokasi jasa photo copy di wilayah Dramaga, Kabupaten Bogor. Aplikasi ini memanfaatkan teknologi peta interaktif untuk memberikan informasi yang akurat dan mudah diakses.
           </p>
           <p className="text-slate-600 text-lg leading-relaxed">
-            Dengan fitur pencarian dan filter yang lengkap, pengguna dapat dengan mudah menemukan toko fotokopi terdekat berdasarkan layanan yang dibutuhkan, seperti print warna, jilid, dan foto copy warna. Sistem ini juga menyediakan informasi jam operasional dan rating dari setiap toko.
+            Dengan fitur pencarian dan filter yang lengkap, pengguna dapat dengan mudah menemukan toko photo copy terdekat berdasarkan layanan yang dibutuhkan, seperti print warna, jilid, dan foto copy warna. Sistem ini juga menyediakan informasi jam operasional dan rating dari setiap toko.
           </p>
         </div>
       </div>
