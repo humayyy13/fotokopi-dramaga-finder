@@ -19,7 +19,6 @@ export type Database = {
           address: string
           close_time: string
           created_at: string
-          description: string
           fotokopi: boolean
           hours: string
           id: string
@@ -38,7 +37,6 @@ export type Database = {
           address: string
           close_time?: string
           created_at?: string
-          description?: string
           fotokopi?: boolean
           hours?: string
           id?: string
@@ -57,7 +55,6 @@ export type Database = {
           address?: string
           close_time?: string
           created_at?: string
-          description?: string
           fotokopi?: boolean
           hours?: string
           id?: string

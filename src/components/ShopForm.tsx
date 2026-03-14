@@ -21,7 +21,6 @@ const ShopForm = ({ initial, onSubmit, title }: ShopFormProps) => {
     closeTime: initial?.closeTime || "21:00",
     services: initial?.services || { printWarna: false, jilid: false, laminating: false, fotokopi: true },
     image: initial?.image || "",
-    description: initial?.description || "",
     whatsapp: initial?.whatsapp || "",
   });
   const [errors, setErrors] = useState<Record<string, string>>({});

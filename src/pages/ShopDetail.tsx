@@ -54,8 +54,6 @@ const ShopDetail = () => {
               </div>
             </div>
 
-            <p className="text-muted-foreground mb-6">{shop.description}</p>
-
             <div className="flex flex-col gap-3 mb-6">
               <div className="flex items-center gap-2 text-sm">
                 <Clock className="h-4 w-4 text-primary" />

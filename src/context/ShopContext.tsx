@@ -33,6 +33,7 @@ export const ShopProvider = ({ children }: { children: ReactNode }) => {
     const row = shopToDbRow(shop);
     const { id, ...rest } = row;
     const { error } = await supabase.from("shops").insert(rest);
+    if (error) console.error("Supabase insert error:", error);
     if (!error) await fetchShops();
   };
 
@@ -40,11 +41,13 @@ export const ShopProvider = ({ children }: { children: ReactNode }) => {
     const row = shopToDbRow(shop);
     const { id, ...rest } = row;
     const { error } = await supabase.from("shops").update(rest).eq("id", shop.id);
+    if (error) console.error("Supabase update error:", error);
     if (!error) await fetchShops();
   };
 
   const deleteShop = async (id: string) => {
     const { error } = await supabase.from("shops").delete().eq("id", id);
+    if (error) console.error("Supabase delete error:", error);
     if (!error) await fetchShops();
   };
 

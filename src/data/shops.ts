@@ -15,7 +15,6 @@ export interface Shop {
     fotokopi: boolean;
   };
   image: string;
-  description: string;
   whatsapp?: string;
 }
 
@@ -38,7 +37,6 @@ export function dbRowToShop(row: any): Shop {
       fotokopi: row.fotokopi,
     },
     image: row.image,
-    description: row.description,
     whatsapp: row.whatsapp || "",
   };
 }
@@ -60,7 +58,6 @@ export function shopToDbRow(shop: Shop) {
     laminating: shop.services.laminating,
     fotokopi: shop.services.fotokopi,
     image: shop.image,
-    description: shop.description,
     whatsapp: shop.whatsapp || null,
   };
 }

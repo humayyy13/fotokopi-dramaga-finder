@@ -80,7 +80,6 @@ const AdminShopList = () => {
       "Print Warna",
       "Jilid",
       "Foto Copy Warna",
-      "Deskripsi",
       "WhatsApp",
     ];
 
@@ -96,7 +95,6 @@ const AdminShopList = () => {
       s.services.printWarna ? "Ya" : "Tidak",
       s.services.jilid ? "Ya" : "Tidak",
       s.services.laminating ? "Ya" : "Tidak",
-      `"${(s.description || "").replace(/"/g, '""')}"`,
       `"${s.whatsapp || ""}"`,
     ]);
 
