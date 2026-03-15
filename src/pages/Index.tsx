@@ -7,6 +7,7 @@ import { sortByDistance, haversineDistance } from "@/lib/geo-utils";
 import FeatureCards from "@/components/FeatureCards";
 import ShopCard from "@/components/ShopCard";
 import HeroIllustration from "@/components/HeroIllustration";
+import CityscapeBackground from "@/components/CityscapeBackground";
 
 const Index = () => {
   const { shops } = useShops();
@@ -48,6 +49,7 @@ const Index = () => {
     <div className="min-h-screen bg-background relative overflow-hidden">
       {/* Hero */}
       <section className="relative pt-20 pb-16 lg:pt-28 lg:pb-24 px-4 overflow-hidden">
+        <CityscapeBackground />
         <div className="container mx-auto max-w-6xl relative z-10">
           <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
 

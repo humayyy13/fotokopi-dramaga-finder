@@ -1,4 +1,4 @@
-import heroImage from '../assets/hero-illustration.png';
+import heroImage from '../assets/hero-illustration-transparent.png';
 
 const HeroIllustration = () => {
     return (
@@ -50,7 +50,7 @@ const HeroIllustration = () => {
             <img 
                 src={heroImage} 
                 alt="Ilustrasi Mesin Photo Copy GIS" 
-                className="w-full h-auto mix-blend-multiply relative z-10"
+                className="w-full h-auto relative z-10 drop-shadow-xl"
             />
         </div>
     );
