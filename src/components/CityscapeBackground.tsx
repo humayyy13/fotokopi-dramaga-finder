@@ -17,48 +17,48 @@ const CityscapeBackground = () => {
         {/* Distant Mountains / Hills */}
         <path d="M0 400 L0 300 Q 200 250 500 300 T 1000 280 T 1440 320 L1440 400 Z" fill="#Eae8d9" opacity="0.8"/>
         
-        {/* Left Side: Factories */}
+        {/* Left Side: Factories (Moved to be more central) */}
         <g opacity="0.9">
-          <rect x="50" y="240" width="40" height="160" fill="#Dcd8ca" fillOpacity="0" />
-          <path d="M50 400 L50 240 L90 240 L90 400 Z" fill="#Dcd8ca" />
-          <path d="M90 400 L90 280 L140 280 L140 400 Z" fill="#Dcd8ca" />
-          <path d="M140 400 L140 260 L170 260 L170 400 Z" fill="#Dcd8ca" />
+          <rect x="350" y="240" width="40" height="160" fill="#Dcd8ca" fillOpacity="0" />
+          <path d="M350 400 L350 240 L390 240 L390 400 Z" fill="#Dcd8ca" />
+          <path d="M390 400 L390 280 L440 280 L440 400 Z" fill="#Dcd8ca" />
+          <path d="M440 400 L440 260 L470 260 L470 400 Z" fill="#Dcd8ca" />
           {/* Factory Roofs */}
-          <polygon points="50,240 90,200 90,240" fill="#Dcd8ca" />
-          <polygon points="140,260 170,220 170,260" fill="#Dcd8ca" />
+          <polygon points="350,240 390,200 390,240" fill="#Dcd8ca" />
+          <polygon points="440,260 470,220 470,260" fill="#Dcd8ca" />
           
           {/* Smoke Stacks */}
-          <rect x="110" y="180" width="10" height="100" fill="#Dcd8ca" />
-          <rect x="130" y="150" width="12" height="130" fill="#Dcd8ca" />
+          <rect x="410" y="180" width="10" height="100" fill="#Dcd8ca" />
+          <rect x="430" y="150" width="12" height="130" fill="#Dcd8ca" />
           {/* Smoke */}
-          <circle cx="115" cy="160" r="15" fill="#Eceadb" />
-          <circle cx="136" cy="120" r="20" fill="#Eceadb" />
-          <circle cx="120" cy="135" r="25" fill="#Eceadb" />
+          <circle cx="415" cy="160" r="15" fill="#Eceadb" />
+          <circle cx="436" cy="120" r="20" fill="#Eceadb" />
+          <circle cx="420" cy="135" r="25" fill="#Eceadb" />
         </g>
         
-        {/* Right Side: Modern Buildings */}
+        {/* Right Side: Modern Buildings (Moved to be more central) */}
         <g opacity="0.9">
-          <rect x="1150" y="200" width="60" height="200" fill="#Dcd8ca" />
-          <rect x="1230" y="150" width="80" height="250" fill="#Dcd8ca" />
-          <rect x="1330" y="220" width="70" height="180" fill="#Dcd8ca" />
-          <rect x="1210" y="300" width="130" height="100" fill="#D1cfc0" />
+          <rect x="850" y="200" width="60" height="200" fill="#Dcd8ca" />
+          <rect x="930" y="150" width="80" height="250" fill="#Dcd8ca" />
+          <rect x="1030" y="220" width="70" height="180" fill="#Dcd8ca" />
+          <rect x="910" y="300" width="130" height="100" fill="#D1cfc0" />
           
           {/* Windows - Building 2 */}
-          <rect x="1250" y="170" width="10" height="15" fill="#F4f2e9" />
-          <rect x="1270" y="170" width="10" height="15" fill="#F4f2e9" />
-          <rect x="1290" y="170" width="10" height="15" fill="#F4f2e9" />
-          <rect x="1250" y="200" width="10" height="15" fill="#F4f2e9" />
-          <rect x="1270" y="200" width="10" height="15" fill="#F4f2e9" />
-          <rect x="1290" y="200" width="10" height="15" fill="#F4f2e9" />
-          <rect x="1250" y="230" width="10" height="15" fill="#F4f2e9" />
-          <rect x="1270" y="230" width="10" height="15" fill="#F4f2e9" />
-          <rect x="1290" y="230" width="10" height="15" fill="#F4f2e9" />
+          <rect x="950" y="170" width="10" height="15" fill="#F4f2e9" />
+          <rect x="970" y="170" width="10" height="15" fill="#F4f2e9" />
+          <rect x="990" y="170" width="10" height="15" fill="#F4f2e9" />
+          <rect x="950" y="200" width="10" height="15" fill="#F4f2e9" />
+          <rect x="970" y="200" width="10" height="15" fill="#F4f2e9" />
+          <rect x="990" y="200" width="10" height="15" fill="#F4f2e9" />
+          <rect x="950" y="230" width="10" height="15" fill="#F4f2e9" />
+          <rect x="970" y="230" width="10" height="15" fill="#F4f2e9" />
+          <rect x="990" y="230" width="10" height="15" fill="#F4f2e9" />
           
           {/* Windows - Building 1 */}
-          <rect x="1165" y="220" width="10" height="15" fill="#F4f2e9" />
-          <rect x="1185" y="220" width="10" height="15" fill="#F4f2e9" />
-          <rect x="1165" y="250" width="10" height="15" fill="#F4f2e9" />
-          <rect x="1185" y="250" width="10" height="15" fill="#F4f2e9" />
+          <rect x="865" y="220" width="10" height="15" fill="#F4f2e9" />
+          <rect x="885" y="220" width="10" height="15" fill="#F4f2e9" />
+          <rect x="865" y="250" width="10" height="15" fill="#F4f2e9" />
+          <rect x="885" y="250" width="10" height="15" fill="#F4f2e9" />
         </g>
         
         {/* Foreground Hills */}

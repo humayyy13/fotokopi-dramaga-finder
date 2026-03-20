@@ -85,7 +85,33 @@ export const getWaLink = (whatsapp: string | undefined | null, shopName: string)
   if (cleanWa.startsWith("0")) {
     cleanWa = "62" + cleanWa.slice(1);
   }
-  const message = encodeURIComponent(`Halo, saya melihat info toko ${shopName} di web SIG Photo Copy Dramaga. Saya mau tanya...`);
+
+  const hour = new Date().getHours();
+  let greeting = "pagi";
+  if (hour >= 11 && hour < 15) {
+    greeting = "siang";
+  } else if (hour >= 15 && hour < 19) {
+    greeting = "sore";
+  } else if (hour >= 19 || hour < 3) {
+    greeting = "malam";
+  }
+
+  const wave = String.fromCodePoint(0x1F44B);
+  const pin = String.fromCodePoint(0x1F4CD);
+  const page = String.fromCodePoint(0x1F4C4);
+  const printer = String.fromCodePoint(0x1F5A8, 0xFE0F);
+  const smile = String.fromCodePoint(0x1F60A);
+
+  const messageText = `Selamat ${greeting} ${wave}
+
+Saya menemukan toko ${shopName} melalui website SIG Photo Copy Dramaga ${pin}
+
+Saya ingin menanyakan beberapa layanan yang tersedia di toko ini ${page}${printer}
+
+Apakah bisa dibantu informasinya?  
+Terima kasih ${smile}`;
+
+  const message = encodeURIComponent(messageText);
   return `https://wa.me/${cleanWa}?text=${message}`;
 };
 
