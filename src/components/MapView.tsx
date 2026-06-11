@@ -4,6 +4,7 @@ import "leaflet-routing-machine";
 import "leaflet.heat";
 import { Shop } from "@/data/shops";
 import { haversineDistance } from "@/lib/geo-utils";
+import { formatHoursSummary } from "@/lib/hours-utils";
 
 interface MapViewProps {
   shops: Shop[];
@@ -172,7 +173,7 @@ const MapView = ({
             </span>
             <span style="color:#a1a1aa;font-size:12px;">•</span>
             <span style="font-size:12px;font-weight:500;color:#1a4d33;background:#1a4d331a;padding:2px 6px;border-radius:4px;">
-              ${shop.hours}
+              ${formatHoursSummary(shop.hours)}
             </span>
             ${distanceHtml}
           </div>

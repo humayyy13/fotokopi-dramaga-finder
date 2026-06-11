@@ -3,6 +3,7 @@ import { useShops } from "@/context/ShopContext";
 import MapView from "@/components/MapView";
 import { useGeolocation } from "@/hooks/useGeolocation";
 import { haversineDistance, formatDistance, isWithinRadius, estimateTime, getWaLink } from "@/lib/geo-utils";
+import { formatHoursSummary, isShopOpenNow } from "@/lib/hours-utils";
 import {
   Star,
   Search,
@@ -56,14 +57,6 @@ const MapPage = () => {
     };
   }, [userLocation]);
 
-  const isOpenNow = (openTime: string, closeTime: string) => {
-    const now = new Date();
-    const [oh, om] = openTime.split(":").map(Number);
-    const [ch, cm] = closeTime.split(":").map(Number);
-    const mins = now.getHours() * 60 + now.getMinutes();
-    return mins >= oh * 60 + om && mins <= ch * 60 + cm;
-  };
-
   const filtered = useMemo(() => {
     let result = shops;
 
@@ -75,7 +68,7 @@ const MapPage = () => {
     }
 
     result = result.filter((s) => {
-      if (filters.openNow && !isOpenNow(s.openTime, s.closeTime)) return false;
+      if (filters.openNow && !isShopOpenNow(s.hours, s.openTime, s.closeTime)) return false;
       if (filters.printWarna && !s.services.printWarna) return false;
       if (filters.jilid && !s.services.jilid) return false;
       if (filters.laminating && !s.services.laminating) return false;
@@ -361,7 +354,7 @@ const MapPage = () => {
                       <Star className="h-3.5 w-3.5 fill-accent text-accent" />
                       <span className="text-xs font-semibold">{shop.rating}</span>
                       <span className="text-muted-foreground text-xs mx-1">•</span>
-                      <span className="text-xs font-medium text-primary bg-primary/10 px-2 py-0.5 rounded-md">{shop.hours}</span>
+                      <span className="text-xs font-medium text-primary bg-primary/10 px-2 py-0.5 rounded-md">{formatHoursSummary(shop.hours)}</span>
                       {userLocation && (
                         <button
                           onClick={(e) => {

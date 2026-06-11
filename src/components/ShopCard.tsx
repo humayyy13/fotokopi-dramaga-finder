@@ -3,6 +3,7 @@ import { WhatsAppIcon } from "@/components/WhatsAppIcon";
 import { Link } from "react-router-dom";
 import { Shop } from "@/data/shops";
 import { formatDistance, getWaLink } from "@/lib/geo-utils";
+import { formatHoursSummary } from "@/lib/hours-utils";
 
 interface ShopCardProps {
   shop: Shop;
@@ -33,7 +34,7 @@ const ShopCard = ({ shop, distance }: ShopCardProps) => (
           <Star className="h-4 w-4 fill-amber-400 text-amber-400" />
           <span className="text-sm font-medium">{shop.rating}</span>
         </div>
-        <span className="text-xs bg-secondary px-2 py-1 rounded-md">{shop.hours}</span>
+        <span className="text-xs bg-secondary px-2 py-1 rounded-md">{formatHoursSummary(shop.hours)}</span>
         {shop.whatsapp && (
           <a
             href={getWaLink(shop.whatsapp, shop.name)}

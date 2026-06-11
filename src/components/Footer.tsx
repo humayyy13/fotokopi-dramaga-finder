@@ -20,7 +20,7 @@ const Footer = () => (
           <ul className="space-y-2 text-sm">
             <li><Link to="/" className="text-sidebar-foreground/70 hover:text-sidebar-primary transition-colors">Beranda</Link></li>
             <li><Link to="/map" className="text-sidebar-foreground/70 hover:text-sidebar-primary transition-colors">Peta</Link></li>
-            <li><Link to="/about" className="text-sidebar-foreground/70 hover:text-sidebar-primary transition-colors">Tentang</Link></li>
+            <li><Link to="/#about" className="text-sidebar-foreground/70 hover:text-sidebar-primary transition-colors">Tentang</Link></li>
           </ul>
         </div>
 

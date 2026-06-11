@@ -3,6 +3,7 @@ import { useShops } from "@/context/ShopContext";
 import { Pencil, Trash2, Plus, Star, Search, Download, ArrowUpDown, Filter } from "lucide-react";
 import { useState, useMemo } from "react";
 import { WhatsAppIcon } from "@/components/WhatsAppIcon";
+import { formatHoursSummary } from "@/lib/hours-utils";
 
 type SortKey = "name" | "rating" | "hours";
 type SortDir = "asc" | "desc";
@@ -236,6 +237,7 @@ const AdminShopList = () => {
               <tr className="border-b bg-secondary/50">
                 <th className="text-left px-4 py-3 font-medium">Nama</th>
                 <th className="text-left px-4 py-3 font-medium hidden md:table-cell">Alamat</th>
+                <th className="text-left px-4 py-3 font-medium">WhatsApp</th>
                 <th className="text-left px-4 py-3 font-medium">Rating</th>
                 <th className="text-left px-4 py-3 font-medium hidden sm:table-cell">Jam</th>
                 <th className="text-left px-4 py-3 font-medium hidden lg:table-cell">Layanan</th>
@@ -245,7 +247,7 @@ const AdminShopList = () => {
             <tbody>
               {filtered.length === 0 ? (
                 <tr>
-                  <td colSpan={6} className="text-center py-12 text-muted-foreground">
+                  <td colSpan={7} className="text-center py-12 text-muted-foreground">
                     Tidak ada toko ditemukan.
                   </td>
                 </tr>
@@ -259,24 +261,30 @@ const AdminShopList = () => {
 
                   return (
                     <tr key={shop.id} className="border-b last:border-0 hover:bg-secondary/30 transition-colors">
-                      <td className="px-4 py-3 font-medium">
-                        <div className="flex items-center gap-2">
-                          {shop.name}
-                          {shop.whatsapp && (
-                            <span className="inline-flex items-center justify-center bg-[#25D366] text-white p-1 rounded-md" title={shop.whatsapp}>
-                              <WhatsAppIcon className="h-3 w-3" />
-                            </span>
-                          )}
-                        </div>
-                      </td>
+                      <td className="px-4 py-3 font-medium">{shop.name}</td>
                       <td className="px-4 py-3 text-muted-foreground hidden md:table-cell">{shop.address}</td>
+                      <td className="px-4 py-3">
+                        {shop.whatsapp ? (
+                          <a
+                            href={`https://wa.me/${shop.whatsapp}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center justify-center bg-[#25D366] hover:bg-[#128C7E] text-white p-1.5 rounded-lg transition-colors shadow-sm"
+                            title={`Chat WhatsApp: ${shop.whatsapp}`}
+                          >
+                            <WhatsAppIcon className="h-4 w-4" />
+                          </a>
+                        ) : (
+                          <span className="text-xs text-muted-foreground">-</span>
+                        )}
+                      </td>
                       <td className="px-4 py-3">
                         <div className="flex items-center gap-1">
                           <Star className="h-3 w-3 fill-amber-400 text-amber-400" />
                           {shop.rating}
                         </div>
                       </td>
-                      <td className="px-4 py-3 text-muted-foreground hidden sm:table-cell">{shop.hours}</td>
+                      <td className="px-4 py-3 text-muted-foreground hidden sm:table-cell">{formatHoursSummary(shop.hours)}</td>
                       <td className="px-4 py-3 hidden lg:table-cell">
                         <div className="flex gap-1 flex-wrap">
                           {services.map((s) => (

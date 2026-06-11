@@ -4,6 +4,7 @@ import { useShops } from "@/context/ShopContext";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { MapPin, Store, Pencil } from "lucide-react";
+import { formatHoursSummary } from "@/lib/hours-utils";
 
 const DRAMAGA_CENTER: [number, number] = [-6.5518, 106.722];
 
@@ -75,7 +76,7 @@ const AdminMap = () => {
           <p style="font-size:11px;color:#6b7280;margin:0 0 6px 0;">${shop.address}</p>
           <div style="display:flex;gap:8px;margin-bottom:6px;">
             <span style="font-size:11px;background:#fef3c7;color:#d97706;padding:2px 6px;border-radius:4px;">⭐ ${shop.rating}</span>
-            <span style="font-size:11px;background:#dbeafe;color:#2563eb;padding:2px 6px;border-radius:4px;">🕐 ${shop.hours}</span>
+            <span style="font-size:11px;background:#dbeafe;color:#2563eb;padding:2px 6px;border-radius:4px;">🕐 ${formatHoursSummary(shop.hours)}</span>
           </div>
           <p style="font-size:10px;color:#9ca3af;margin:0 0 8px 0;">${services.join(" · ")}</p>
           <a href="/admin/shops/edit/${shop.id}" style="display:inline-flex;align-items:center;gap:4px;font-size:11px;background:#16a34a;color:white;padding:4px 10px;border-radius:6px;text-decoration:none;font-weight:600;">

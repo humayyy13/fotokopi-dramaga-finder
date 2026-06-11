@@ -1,8 +1,9 @@
 import { useParams, Link } from "react-router-dom";
 import { useShops } from "@/context/ShopContext";
 import { getWaLink } from "@/lib/geo-utils";
-import { Star, Clock, MapPin, ArrowLeft, Printer, BookOpen, Shield, Copy, ExternalLink, Navigation } from "lucide-react";
+import { Star, MapPin, ArrowLeft, Printer, BookOpen, Shield, Copy, ExternalLink, Navigation } from "lucide-react";
 import { WhatsAppIcon } from "@/components/WhatsAppIcon";
+import { WeeklyHoursDisplay } from "@/components/WeeklyHoursDisplay";
 
 const ShopDetail = () => {
   const { id } = useParams();
@@ -55,10 +56,9 @@ const ShopDetail = () => {
               </div>
             </div>
 
-            <div className="flex flex-col gap-3 mb-6">
-              <div className="flex items-center gap-2 text-sm">
-                <Clock className="h-4 w-4 text-primary" />
-                <span>{shop.hours}</span>
+            <div className="flex flex-col gap-4 mb-6">
+              <div>
+                <WeeklyHoursDisplay hours={shop.hours} />
               </div>
               <div className="flex items-center gap-2 text-sm">
                 <MapPin className="h-4 w-4 text-primary" />

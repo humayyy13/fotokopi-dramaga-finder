@@ -11,7 +11,6 @@ import AdminLayout from "@/components/AdminLayout";
 import Index from "./pages/Index";
 import MapPage from "./pages/MapPage";
 import ShopDetail from "./pages/ShopDetail";
-import About from "./pages/About";
 import AdminLogin from "./pages/admin/AdminLogin";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminShopList from "./pages/admin/AdminShopList";
@@ -49,7 +48,6 @@ const App = () => (
               <Route path="/" element={<PublicLayout><Index /></PublicLayout>} />
               <Route path="/map" element={<PublicLayout><MapPage /></PublicLayout>} />
               <Route path="/shop/:id" element={<PublicLayout><ShopDetail /></PublicLayout>} />
-              <Route path="/about" element={<PublicLayout><About /></PublicLayout>} />
 
               {/* Admin */}
               <Route path="/admin/login" element={<AdminLogin />} />

@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Search, MapPin, Copy, Navigation, Loader2 } from "lucide-react";
 import { useShops } from "@/context/ShopContext";
@@ -9,11 +9,57 @@ import ShopCard from "@/components/ShopCard";
 import HeroIllustration from "@/components/HeroIllustration";
 import CityscapeBackground from "@/components/CityscapeBackground";
 
+const LocationIcon = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 48 48" fill="none" className={className} xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="24" cy="42" rx="10" ry="3" fill="#1E3A8A" fillOpacity="0.1" />
+    <path d="M24 40C24 40 38 28 38 16C38 8.268 31.732 2 24 2C16.268 2 10 8.268 10 16C10 28 24 40 24 40Z" fill="#DBEAFE" />
+    <circle cx="24" cy="16" r="8" fill="#3B82F6" />
+    <circle cx="24" cy="16" r="3" fill="#EFF6FF" />
+  </svg>
+);
+
+const SearchIcon = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 48 48" fill="none" className={className} xmlns="http://www.w3.org/2000/svg">
+    <circle cx="20" cy="20" r="14" fill="#E9D5FF" />
+    <circle cx="20" cy="20" r="10" fill="#A855F7" />
+    <rect x="29" y="32" width="6" height="16" rx="3" transform="rotate(-45 29 32)" fill="#D8B4FE" />
+    <circle cx="20" cy="20" r="4" fill="#F3E8FF" />
+  </svg>
+);
+
+const UsersIcon = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 48 48" fill="none" className={className} xmlns="http://www.w3.org/2000/svg">
+    <circle cx="14" cy="20" r="6" fill="#A7F3D0" />
+    <path d="M6 38C6 33 10 29 16 29H18" stroke="#A7F3D0" strokeWidth="4" strokeLinecap="round" />
+
+    <circle cx="34" cy="20" r="6" fill="#A7F3D0" />
+    <path d="M42 38C42 33 38 29 32 29H30" stroke="#A7F3D0" strokeWidth="4" strokeLinecap="round" />
+
+    <circle cx="24" cy="16" r="8" fill="#10B981" />
+    <path d="M12 40C12 33 16 26 24 26C32 26 36 33 36 40H12Z" fill="#34D399" />
+  </svg>
+);
+
 const Index = () => {
   const { shops } = useShops();
   const [search, setSearch] = useState("");
   const [sortNearest, setSortNearest] = useState(false);
   const { lat, lng, loading: geoLoading, error: geoError, requestLocation } = useGeolocation();
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      if (window.location.hash === "#about") {
+        const element = document.getElementById("about");
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+      }
+    };
+
+    handleHashChange();
+    window.addEventListener("hashchange", handleHashChange);
+    return () => window.removeEventListener("hashchange", handleHashChange);
+  }, []);
 
   const handleNearestToggle = () => {
     if (!lat && !sortNearest) {
@@ -138,6 +184,47 @@ const Index = () => {
               ))}
             </div>
           )}
+        </div>
+      </section>
+
+      {/* Tentang Section */}
+      <section id="about" className="py-20 px-4 bg-background border-t border-border/40 scroll-mt-16">
+        <div className="container mx-auto max-w-5xl">
+          <div className="text-center max-w-3xl mx-auto mb-16 animate-fade-in">
+            <h2 className="text-3xl md:text-4xl font-extrabold mb-4 tracking-tight text-foreground">Tentang SIG Photo Copy Dramaga</h2>
+            <p className="text-muted-foreground text-base md:text-lg leading-relaxed">
+              Sistem Informasi Geografis berbasis web untuk membantu masyarakat menemukan jasa photo copy di wilayah Dramaga, Bogor dengan akurat dan cepat.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+            {[
+              { icon: LocationIcon, title: "Lokasi Akurat", desc: "Pemetaan lokasi photo copy dengan koordinat yang tepat menggunakan teknologi GIS.", bg: "bg-blue-50" },
+              { icon: SearchIcon, title: "Pencarian Mudah", desc: "Filter berdasarkan layanan, jam buka, dan lokasi terdekat dengan cepat.", bg: "bg-purple-50" },
+              { icon: UsersIcon, title: "Untuk Semua", desc: "Didesain untuk mahasiswa, dosen, dan masyarakat umum di wilayah Dramaga.", bg: "bg-teal-50" },
+            ].map((item) => (
+              <div
+                key={item.title}
+                className="bg-card rounded-[2.5rem] p-8 shadow-[0_8px_30px_rgb(0,0,0,0.02)] hover:shadow-[0_20px_40px_rgb(0,0,0,0.05)] hover:-translate-y-1 transition-all duration-300 text-center group border border-border/50"
+              >
+                <div className={`mx-auto flex items-center justify-center w-16 h-16 rounded-2xl ${item.bg} mb-6 transition-transform duration-300 group-hover:scale-110`}>
+                  <item.icon className="h-8 w-8 drop-shadow-sm" />
+                </div>
+                <h3 className="text-lg font-bold mb-3 text-foreground tracking-tight">{item.title}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="bg-card rounded-3xl p-8 md:p-12 shadow-sm border border-border/40 max-w-4xl mx-auto">
+            <h3 className="text-xl font-bold mb-4 text-foreground">Deskripsi Sistem</h3>
+            <p className="text-muted-foreground text-sm md:text-base leading-relaxed mb-4">
+              SIG Photo Copy Dramaga adalah aplikasi web berbasis Sistem Informasi Geografis (SIG) yang dirancang untuk memetakan dan menampilkan lokasi jasa photo copy di wilayah Dramaga, Kabupaten Bogor. Aplikasi ini memanfaatkan teknologi peta interaktif untuk memberikan informasi yang akurat dan mudah diakses.
+            </p>
+            <p className="text-muted-foreground text-sm md:text-base leading-relaxed">
+              Dengan fitur pencarian dan filter yang lengkap, pengguna dapat dengan mudah menemukan toko photo copy terdekat berdasarkan layanan yang dibutuhkan, seperti print warna, jilid, dan foto copy warna. Sistem ini juga menyediakan informasi jam operasional dan rating dari setiap toko.
+            </p>
+          </div>
         </div>
       </section>
     </div>
