@@ -1,3 +1,5 @@
+import { Instagram } from "lucide-react";
+
 const LocationIcon = ({ className }: { className?: string }) => (
   <svg viewBox="0 0 48 48" fill="none" className={className} xmlns="http://www.w3.org/2000/svg">
     <ellipse cx="24" cy="42" rx="10" ry="3" fill="#1E3A8A" fillOpacity="0.1" />
@@ -31,14 +33,7 @@ const UsersIcon = ({ className }: { className?: string }) => (
 
 const About = () => (
   <div className="min-h-screen">
-    <section className="bg-background pt-24 pb-16 px-4 relative">
-      <div className="container mx-auto text-center max-w-3xl relative z-10">
-        <h1 className="text-4xl md:text-5xl font-extrabold mb-6 tracking-tight text-foreground animate-fade-in">Tentang SIG Photo Copy Dramaga</h1>
-        <p className="text-muted-foreground text-lg md:text-xl leading-relaxed animate-fade-in" style={{ animationDelay: "0.1s" }}>
-          Sistem Informasi Geografis berbasis web untuk membantu masyarakat menemukan jasa photo copy di wilayah Dramaga, Bogor.
-        </p>
-      </div>
-    </section>
+
 
     <section className="py-16 px-4">
       <div className="container mx-auto max-w-5xl">
@@ -62,14 +57,30 @@ const About = () => (
           ))}
         </div>
 
-        <div className="bg-white rounded-3xl p-8 md:p-12 shadow-sm border border-border/30 max-w-4xl mx-auto">
-          <h2 className="text-2xl font-bold mb-5 text-foreground">Deskripsi Sistem</h2>
-          <p className="text-slate-600 text-lg leading-relaxed mb-5">
-            SIG Photo Copy Dramaga adalah aplikasi web berbasis Sistem Informasi Geografis (SIG) yang dirancang untuk memetakan dan menampilkan lokasi jasa photo copy di wilayah Dramaga, Kabupaten Bogor. Aplikasi ini memanfaatkan teknologi peta interaktif untuk memberikan informasi yang akurat dan mudah diakses.
-          </p>
-          <p className="text-slate-600 text-lg leading-relaxed">
-            Dengan fitur pencarian dan filter yang lengkap, pengguna dapat dengan mudah menemukan toko photo copy terdekat berdasarkan layanan yang dibutuhkan, seperti print warna, jilid, dan foto copy warna. Sistem ini juga menyediakan informasi jam operasional dan rating dari setiap toko.
-          </p>
+          {/* Profil Pengembang */}
+          <div className="bg-white rounded-3xl p-8 md:p-12 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 max-w-4xl mx-auto animate-fade-in" style={{ animationDelay: "0.2s" }}>
+          <h2 className="text-2xl font-bold mb-8 text-center text-foreground">Pengembang Sistem</h2>
+          <div className="flex flex-col md:flex-row gap-8 items-center md:items-start">
+            <div className="flex-shrink-0">
+              <div className="w-40 h-40 md:w-48 md:h-48 rounded-full overflow-hidden border-4 border-pink-100 shadow-lg relative group">
+                <div className="absolute inset-0 bg-pink-500/10 group-hover:bg-transparent transition-colors z-10"></div>
+                <img src="/syifa_avatar.png" alt="Syifa Humairoh" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+              </div>
+            </div>
+            <div className="flex-1 text-center md:text-left">
+              <h3 className="text-3xl font-extrabold text-foreground mb-2">Syifa Humairoh</h3>
+              <p className="text-pink-600 font-semibold mb-4 text-lg">Web Developer</p>
+              <p className="text-slate-600 leading-relaxed mb-6 text-base md:text-lg">
+                Sistem Informasi Geografis (SIG) Photo copy Dramaga ini dikembangkan oleh Syifa Humairoh, mahasiswi Informatika semester 6 di STIKOM El Rahma. Platform ini dirancang secara khusus untuk memetakan lokasi layanan Photo copy di wilayah Dramaga, sehingga dapat mempermudah mahasiswa maupun masyarakat umum dalam menemukan tempat Photo copy terdekat dengan cepat dan akurat.
+              </p>
+              <div className="flex justify-center md:justify-start">
+                <a href="https://instagram.com/syifa_hmrh13" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-5 py-2.5 bg-white hover:bg-pink-50 text-slate-600 hover:text-pink-600 rounded-full transition-all duration-300 border border-slate-200 shadow-sm hover:shadow-md hover:-translate-y-0.5 group">
+                  <Instagram className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                  <span className="font-medium">@syifa_hmrh13</span>
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>

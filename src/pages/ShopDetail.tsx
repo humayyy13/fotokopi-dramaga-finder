@@ -15,7 +15,7 @@ const ShopDetail = () => {
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <h2 className="text-2xl font-bold mb-2">Toko tidak ditemukan</h2>
-          <Link to="/" className="text-primary hover:underline">Kembali ke beranda</Link>
+          <Link to="/map" className="text-primary hover:underline">Kembali ke peta</Link>
         </div>
       </div>
     );
@@ -33,8 +33,8 @@ const ShopDetail = () => {
   return (
     <div className="min-h-screen py-8 px-4">
       <div className="container mx-auto max-w-3xl">
-        <Link to="/" className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground mb-6 transition-colors">
-          <ArrowLeft className="h-4 w-4" /> Kembali
+        <Link to="/map" className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground mb-6 transition-colors">
+          <ArrowLeft className="h-4 w-4" /> Kembali ke Peta
         </Link>
 
         <div className="bg-card rounded-xl overflow-hidden card-shadow">

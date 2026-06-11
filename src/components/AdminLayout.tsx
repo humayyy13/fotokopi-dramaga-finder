@@ -26,7 +26,7 @@ const AdminLayout = () => {
     <>
       <div className="p-4 border-b border-sidebar-border">
         <Link to="/admin" onClick={onClick} className="flex items-center gap-2 font-bold text-lg">
-          <MapPin className="h-5 w-5 text-sidebar-primary" />
+          <img src="/logo.png" alt="DraCopy Logo" className="w-6 h-6 object-cover rounded-full" />
           Admin Panel
         </Link>
       </div>
@@ -73,7 +73,7 @@ const AdminLayout = () => {
       {/* Mobile Header */}
       <div className="md:hidden flex items-center justify-between p-4 bg-sidebar text-sidebar-foreground border-b border-sidebar-border shrink-0">
         <div className="flex items-center gap-2 font-bold">
-          <MapPin className="h-5 w-5 text-sidebar-primary" />
+          <img src="/logo.png" alt="DraCopy Logo" className="w-6 h-6 object-cover rounded-full" />
           Admin Panel
         </div>
         <Sheet open={open} onOpenChange={setOpen}>

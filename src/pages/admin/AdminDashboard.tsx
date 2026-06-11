@@ -4,10 +4,6 @@ import {
   PieChart,
   Pie,
   Cell,
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
   Tooltip,
   ResponsiveContainer,
   Legend,
@@ -43,18 +39,6 @@ const AdminDashboard = () => {
     { name: "Foto Copy Warna", value: shops.filter((s) => s.services.laminating).length },
   ];
 
-  // ── Bar Chart data: distribusi rating ──
-  const ratingBuckets = [
-    { range: "0-1", count: 0 },
-    { range: "1-2", count: 0 },
-    { range: "2-3", count: 0 },
-    { range: "3-4", count: 0 },
-    { range: "4-5", count: 0 },
-  ];
-  shops.forEach((s) => {
-    const idx = Math.min(Math.floor(s.rating), 4);
-    ratingBuckets[idx].count += 1;
-  });
 
   return (
     <div>
@@ -133,7 +117,7 @@ const AdminDashboard = () => {
       </div>
 
       {/* ── Charts ── */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+      <div className="grid grid-cols-1 gap-6 mb-8">
         {/* Pie Chart — Distribusi Layanan */}
         <div className="bg-card rounded-xl p-5 card-shadow">
           <h2 className="font-semibold mb-4 flex items-center gap-2">
@@ -174,39 +158,7 @@ const AdminDashboard = () => {
           )}
         </div>
 
-        {/* Bar Chart — Distribusi Rating */}
-        <div className="bg-card rounded-xl p-5 card-shadow">
-          <h2 className="font-semibold mb-4 flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-blue-500 inline-block" />
-            Distribusi Rating
-          </h2>
-          {shops.length > 0 ? (
-            <ResponsiveContainer width="100%" height={260}>
-              <BarChart data={ratingBuckets} barCategoryGap="20%">
-                <XAxis
-                  dataKey="range"
-                  tick={{ fontSize: 12, fontWeight: 500 }}
-                  axisLine={false}
-                  tickLine={false}
-                />
-                <YAxis
-                  allowDecimals={false}
-                  tick={{ fontSize: 12 }}
-                  axisLine={false}
-                  tickLine={false}
-                  width={30}
-                />
-                <Tooltip
-                  contentStyle={{ borderRadius: 12, fontSize: 12, border: "1px solid #e5e7eb" }}
-                  cursor={{ fill: "rgba(59,130,246,0.08)" }}
-                />
-                <Bar dataKey="count" name="Jumlah Toko" fill="#3b82f6" radius={[8, 8, 0, 0]} />
-              </BarChart>
-            </ResponsiveContainer>
-          ) : (
-            <p className="text-muted-foreground text-sm text-center py-12">Belum ada data</p>
-          )}
-        </div>
+
       </div>
 
       {/* ── Toko Terbaru ── */}

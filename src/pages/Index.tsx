@@ -1,10 +1,9 @@
 import { useState, useMemo, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Search, MapPin, Copy, Navigation, Loader2 } from "lucide-react";
+import { Search, MapPin, Copy, Navigation, Loader2, Instagram } from "lucide-react";
 import { useShops } from "@/context/ShopContext";
 import { useGeolocation } from "@/hooks/useGeolocation";
 import { sortByDistance, haversineDistance } from "@/lib/geo-utils";
-import FeatureCards from "@/components/FeatureCards";
 import ShopCard from "@/components/ShopCard";
 import HeroIllustration from "@/components/HeroIllustration";
 import CityscapeBackground from "@/components/CityscapeBackground";
@@ -68,6 +67,11 @@ const Index = () => {
     } else {
       setSortNearest(!sortNearest);
     }
+    
+    const element = document.getElementById("shop-list");
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
   };
 
   const filtered = useMemo(() => {
@@ -117,6 +121,14 @@ const Index = () => {
                     placeholder="Cari nama atau alamat photo copy..."
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") {
+                        const element = document.getElementById("shop-list");
+                        if (element) {
+                          element.scrollIntoView({ behavior: "smooth" });
+                        }
+                      }
+                    }}
                     className="w-full pl-16 pr-4 h-full bg-transparent border-none text-foreground text-lg focus:outline-none focus:ring-0 placeholder:text-muted-foreground/70"
                   />
                 </div>
@@ -161,8 +173,6 @@ const Index = () => {
         </div>
       </section>
 
-      <FeatureCards />
-
       {/* Shop List */}
       <section id="shop-list" className="py-16 px-4 bg-secondary/30">
         <div className="container mx-auto">
@@ -190,40 +200,30 @@ const Index = () => {
       {/* Tentang Section */}
       <section id="about" className="py-20 px-4 bg-background border-t border-border/40 scroll-mt-16">
         <div className="container mx-auto max-w-5xl">
-          <div className="text-center max-w-3xl mx-auto mb-16 animate-fade-in">
-            <h2 className="text-3xl md:text-4xl font-extrabold mb-4 tracking-tight text-foreground">Tentang SIG Photo Copy Dramaga</h2>
-            <p className="text-muted-foreground text-base md:text-lg leading-relaxed">
-              Sistem Informasi Geografis berbasis web untuk membantu masyarakat menemukan jasa photo copy di wilayah Dramaga, Bogor dengan akurat dan cepat.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-            {[
-              { icon: LocationIcon, title: "Lokasi Akurat", desc: "Pemetaan lokasi photo copy dengan koordinat yang tepat menggunakan teknologi GIS.", bg: "bg-blue-50" },
-              { icon: SearchIcon, title: "Pencarian Mudah", desc: "Filter berdasarkan layanan, jam buka, dan lokasi terdekat dengan cepat.", bg: "bg-purple-50" },
-              { icon: UsersIcon, title: "Untuk Semua", desc: "Didesain untuk mahasiswa, dosen, dan masyarakat umum di wilayah Dramaga.", bg: "bg-teal-50" },
-            ].map((item) => (
-              <div
-                key={item.title}
-                className="bg-card rounded-[2.5rem] p-8 shadow-[0_8px_30px_rgb(0,0,0,0.02)] hover:shadow-[0_20px_40px_rgb(0,0,0,0.05)] hover:-translate-y-1 transition-all duration-300 text-center group border border-border/50"
-              >
-                <div className={`mx-auto flex items-center justify-center w-16 h-16 rounded-2xl ${item.bg} mb-6 transition-transform duration-300 group-hover:scale-110`}>
-                  <item.icon className="h-8 w-8 drop-shadow-sm" />
+          {/* Profil Pengembang */}
+          <div className="bg-card rounded-3xl p-8 md:p-12 shadow-sm border border-border/40 max-w-4xl mx-auto animate-fade-in" style={{ animationDelay: "0.2s" }}>
+            <h2 className="text-2xl font-bold mb-8 text-center text-foreground">Pengembang Sistem</h2>
+            <div className="flex flex-col md:flex-row gap-8 items-center md:items-start">
+              <div className="flex-shrink-0">
+                <div className="w-40 h-40 md:w-48 md:h-48 rounded-full overflow-hidden border-4 border-pink-100 shadow-lg relative group">
+                  <div className="absolute inset-0 bg-pink-500/10 group-hover:bg-transparent transition-colors z-10"></div>
+                  <img src="/syifa_avatar.png" alt="Syifa Humairoh" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                 </div>
-                <h3 className="text-lg font-bold mb-3 text-foreground tracking-tight">{item.title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
               </div>
-            ))}
-          </div>
-
-          <div className="bg-card rounded-3xl p-8 md:p-12 shadow-sm border border-border/40 max-w-4xl mx-auto">
-            <h3 className="text-xl font-bold mb-4 text-foreground">Deskripsi Sistem</h3>
-            <p className="text-muted-foreground text-sm md:text-base leading-relaxed mb-4">
-              SIG Photo Copy Dramaga adalah aplikasi web berbasis Sistem Informasi Geografis (SIG) yang dirancang untuk memetakan dan menampilkan lokasi jasa photo copy di wilayah Dramaga, Kabupaten Bogor. Aplikasi ini memanfaatkan teknologi peta interaktif untuk memberikan informasi yang akurat dan mudah diakses.
-            </p>
-            <p className="text-muted-foreground text-sm md:text-base leading-relaxed">
-              Dengan fitur pencarian dan filter yang lengkap, pengguna dapat dengan mudah menemukan toko photo copy terdekat berdasarkan layanan yang dibutuhkan, seperti print warna, jilid, dan foto copy warna. Sistem ini juga menyediakan informasi jam operasional dan rating dari setiap toko.
-            </p>
+              <div className="flex-1 text-center md:text-left">
+                <h3 className="text-3xl font-extrabold text-foreground mb-2">Syifa Humairoh</h3>
+                <p className="text-pink-600 font-semibold mb-4 text-lg">Web Developer</p>
+                <p className="text-muted-foreground leading-relaxed mb-6 text-base md:text-lg">
+                  Sistem Informasi Geografis (SIG) Photo copy Dramaga ini dikembangkan oleh Syifa Humairoh, mahasiswi Informatika semester 6 di STIKOM El Rahma. Platform ini dirancang secara khusus untuk memetakan lokasi layanan Photo copy di wilayah Dramaga, sehingga dapat mempermudah mahasiswa maupun masyarakat umum dalam menemukan tempat Photo copy terdekat dengan cepat dan akurat.
+                </p>
+                <div className="flex justify-center md:justify-start">
+                  <a href="https://instagram.com/syifa_hmrh13" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-5 py-2.5 bg-background hover:bg-pink-50 text-foreground hover:text-pink-600 rounded-full transition-all duration-300 border border-border shadow-sm hover:shadow-md hover:-translate-y-0.5 group">
+                    <Instagram className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                    <span className="font-medium">@syifa_hmrh13</span>
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
