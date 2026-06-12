@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { MapPin, Mail, Phone } from "lucide-react";
 
 const Footer = () => (
@@ -18,9 +18,9 @@ const Footer = () => (
         <div>
           <h4 className="font-semibold mb-3">Navigasi</h4>
           <ul className="space-y-2 text-sm">
-            <li><Link to="/" className="text-sidebar-foreground/70 hover:text-sidebar-primary transition-colors">Beranda</Link></li>
-            <li><Link to="/map" className="text-sidebar-foreground/70 hover:text-sidebar-primary transition-colors">Peta</Link></li>
-            <li><Link to="/#about" className="text-sidebar-foreground/70 hover:text-sidebar-primary transition-colors">Tentang</Link></li>
+            <li><Link href="/" className="text-sidebar-foreground/70 hover:text-sidebar-primary transition-colors">Beranda</Link></li>
+            <li><Link href="/map" className="text-sidebar-foreground/70 hover:text-sidebar-primary transition-colors">Peta</Link></li>
+            <li><Link href="/#about" className="text-sidebar-foreground/70 hover:text-sidebar-primary transition-colors">Tentang</Link></li>
           </ul>
         </div>
 

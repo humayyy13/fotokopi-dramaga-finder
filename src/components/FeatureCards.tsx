@@ -54,19 +54,19 @@ const features = [
   },
   {
     icon: PrinterIcon,
-    title: "Print Warna",
+    title: "Photo Copy Warna",
     desc: "Cetak berwarna berkualitas tinggi",
     bg: "bg-green-50"
   },
   {
     icon: BookIcon,
-    title: "Jilid",
+    title: "Jilid Hardcover",
     desc: "Layanan penjilidan profesional",
     bg: "bg-orange-50"
   },
   {
     icon: DocumentIcon,
-    title: "Foto Copy Warna",
+    title: "Print Ukuran Besar (A3/A3+)",
     desc: "Layanan photo copy warna berkualitas tinggi",
     bg: "bg-yellow-50"
   },

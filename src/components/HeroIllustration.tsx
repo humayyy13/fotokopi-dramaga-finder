@@ -48,7 +48,7 @@ const HeroIllustration = () => {
             </div>
 
             <img 
-                src={heroImage} 
+                src={heroImage.src} 
                 alt="Ilustrasi Mesin Photo Copy GIS" 
                 className="w-full h-auto relative z-10 drop-shadow-xl"
             />

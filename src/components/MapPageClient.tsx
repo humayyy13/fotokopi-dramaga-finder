@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, useMemo, useCallback, useEffect } from "react";
 import { useShops } from "@/context/ShopContext";
 import MapView from "@/components/MapView";
@@ -18,7 +20,7 @@ import {
 } from "lucide-react";
 import { WhatsAppIcon } from "@/components/WhatsAppIcon";
 
-const MapPage = () => {
+export default function MapPageClient() {
   const { shops, loading, getShop } = useShops();
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [search, setSearch] = useState("");
@@ -331,10 +333,10 @@ const MapPage = () => {
                   ? haversineDistance(userLocation.lat, userLocation.lng, shop.lat, shop.lng)
                   : null;
                 return (
-                  <button
+                  <div
                     key={shop.id}
                     onClick={() => setSelectedId(shop.id)}
-                    className={`w-full text-left p-4 rounded-2xl border transition-all duration-200 ${
+                    className={`w-full text-left p-4 rounded-2xl border cursor-pointer transition-all duration-200 ${
                       selectedId === shop.id
                         ? "border-primary bg-primary/5 shadow-md scale-[1.02]"
                         : "border-border/60 bg-white hover:border-primary/40 hover:shadow-sm"
@@ -381,7 +383,7 @@ const MapPage = () => {
                         </a>
                       )}
                     </div>
-                  </button>
+                  </div>
                 );
               })
             )}
@@ -407,6 +409,4 @@ const MapPage = () => {
       </div>
     </div>
   );
-};
-
-export default MapPage;
+}

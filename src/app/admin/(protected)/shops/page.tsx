@@ -1,4 +1,6 @@
-import { Link } from "react-router-dom";
+"use client";
+
+import Link from "next/link";
 import { useShops } from "@/context/ShopContext";
 import { Pencil, Trash2, Plus, Star, Search, Download, ArrowUpDown, Filter } from "lucide-react";
 import { useState, useMemo } from "react";
@@ -8,7 +10,7 @@ import { formatHoursSummary } from "@/lib/hours-utils";
 type SortKey = "name" | "rating" | "hours";
 type SortDir = "asc" | "desc";
 
-const AdminShopList = () => {
+export default function AdminShopList() {
   const { shops, deleteShop } = useShops();
   const [confirmId, setConfirmId] = useState<string | null>(null);
 
@@ -123,7 +125,7 @@ const AdminShopList = () => {
             <Download className="h-4 w-4" /> Export CSV
           </button>
           <Link
-            to="/admin/shops/create"
+            href="/admin/shops/create"
             className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-4 py-2 rounded-lg text-sm font-medium hover:bg-primary/90 transition-colors"
           >
             <Plus className="h-4 w-4" /> Tambah
@@ -300,7 +302,7 @@ const AdminShopList = () => {
                       <td className="px-4 py-3">
                         <div className="flex items-center justify-end gap-1">
                           <Link
-                            to={`/admin/shops/edit/${shop.id}`}
+                            href={`/admin/shops/edit/${shop.id}`}
                             className="p-2 rounded-lg hover:bg-secondary transition-colors"
                           >
                             <Pencil className="h-4 w-4" />
@@ -340,6 +342,4 @@ const AdminShopList = () => {
       </div>
     </div>
   );
-};
-
-export default AdminShopList;
+}

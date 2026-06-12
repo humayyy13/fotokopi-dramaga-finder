@@ -1,14 +1,15 @@
+"use client";
+
 import { useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
 import { useShops } from "@/context/ShopContext";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
-import { MapPin, Store, Pencil } from "lucide-react";
+import { MapPin, Store } from "lucide-react";
 import { formatHoursSummary } from "@/lib/hours-utils";
 
 const DRAMAGA_CENTER: [number, number] = [-6.5518, 106.722];
 
-const AdminMap = () => {
+export default function AdminMapClient() {
   const { shops, loading } = useShops();
   const mapRef = useRef<L.Map | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -127,6 +128,4 @@ const AdminMap = () => {
       </p>
     </div>
   );
-};
-
-export default AdminMap;
+}

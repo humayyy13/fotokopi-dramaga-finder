@@ -1,3 +1,5 @@
+"use client";
+
 import { useShops } from "@/context/ShopContext";
 import { Store, Star, MapPin, Clock, TrendingUp } from "lucide-react";
 import {
@@ -11,7 +13,7 @@ import {
 
 const COLORS = ["#10b981", "#3b82f6", "#f59e0b", "#ef4444"];
 
-const AdminDashboard = () => {
+export default function AdminDashboard() {
   const { shops } = useShops();
   const avgRating = shops.length
     ? (shops.reduce((a, s) => a + s.rating, 0) / shops.length).toFixed(1)
@@ -38,7 +40,6 @@ const AdminDashboard = () => {
     { name: "Jilid Hardcover", value: shops.filter((s) => s.services.jilid).length },
     { name: "Print Ukuran Besar (A3/A3+)", value: shops.filter((s) => s.services.laminating).length },
   ];
-
 
   return (
     <div>
@@ -157,8 +158,6 @@ const AdminDashboard = () => {
             <p className="text-muted-foreground text-sm text-center py-12">Belum ada data</p>
           )}
         </div>
-
-
       </div>
 
       {/* ── Toko Terbaru ── */}
@@ -184,6 +183,4 @@ const AdminDashboard = () => {
       </div>
     </div>
   );
-};
-
-export default AdminDashboard;
+}

@@ -96,20 +96,14 @@ export const getWaLink = (whatsapp: string | undefined | null, shopName: string)
     greeting = "malam";
   }
 
-  const wave = String.fromCodePoint(0x1F44B);
-  const pin = String.fromCodePoint(0x1F4CD);
-  const page = String.fromCodePoint(0x1F4C4);
-  const printer = String.fromCodePoint(0x1F5A8, 0xFE0F);
-  const smile = String.fromCodePoint(0x1F60A);
+  const messageText = `Selamat ${greeting}
 
-  const messageText = `Selamat ${greeting} ${wave}
+Saya menemukan toko ${shopName} melalui website SIG Photo Copy Dramaga
 
-Saya menemukan toko ${shopName} melalui website SIG Photo Copy Dramaga ${pin}
-
-Saya ingin menanyakan beberapa layanan yang tersedia di toko ini ${page}${printer}
+Saya ingin menanyakan beberapa layanan yang tersedia di toko ini
 
 Apakah bisa dibantu informasinya?  
-Terima kasih ${smile}`;
+Terima kasih`;
 
   const message = encodeURIComponent(messageText);
   return `https://wa.me/${cleanWa}?text=${message}`;

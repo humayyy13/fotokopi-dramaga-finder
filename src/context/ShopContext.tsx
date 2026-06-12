@@ -1,3 +1,5 @@
+"use client";
+
 import React, { createContext, useContext, useState, useEffect, ReactNode } from "react";
 import { Shop, dbRowToShop, shopToDbRow } from "@/data/shops";
 import { supabase } from "@/integrations/supabase/client";

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/navigation";
 import { Shop } from "@/data/shops";
 import { parseWeeklyHours, DAYS_ORDER, WeeklyHours, DayHours } from "@/lib/hours-utils";
 
@@ -10,7 +10,7 @@ interface ShopFormProps {
 }
 
 const ShopForm = ({ initial, onSubmit, title }: ShopFormProps) => {
-  const navigate = useNavigate();
+  const router = useRouter();
   const [form, setForm] = useState<Omit<Shop, "id">>({
     name: initial?.name || "",
     address: initial?.address || "",
@@ -87,7 +87,7 @@ const ShopForm = ({ initial, onSubmit, title }: ShopFormProps) => {
       closeTime,
       whatsapp,
     });
-    navigate("/admin/shops");
+    router.push("/admin/shops");
   };
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -232,7 +232,7 @@ const ShopForm = ({ initial, onSubmit, title }: ShopFormProps) => {
                 <input type="checkbox" checked={form.services[key]}
                   onChange={(e) => setForm((f) => ({ ...f, services: { ...f.services, [key]: e.target.checked } }))}
                   className="rounded" />
-                {key === "printWarna" ? "Print Warna" : key === "laminating" ? "Foto Copy Warna" : key === "fotokopi" ? "Photo Copy" : key.charAt(0).toUpperCase() + key.slice(1)}
+                {key === "printWarna" ? "Photo Copy Warna" : key === "laminating" ? "Print Ukuran Besar (A3/A3+)" : key === "fotokopi" ? "Photo Copy" : key.charAt(0).toUpperCase() + key.slice(1)}
               </label>
             ))}
           </div>
@@ -267,7 +267,7 @@ const ShopForm = ({ initial, onSubmit, title }: ShopFormProps) => {
             className="bg-primary text-primary-foreground px-6 py-2.5 rounded-lg font-medium text-sm hover:bg-primary/90 transition-colors">
             Simpan
           </button>
-          <button type="button" onClick={() => navigate("/admin/shops")}
+          <button type="button" onClick={() => router.push("/admin/shops")}
             className="bg-secondary text-secondary-foreground px-6 py-2.5 rounded-lg font-medium text-sm hover:bg-secondary/80 transition-colors">
             Batal
           </button>
