@@ -1,5 +1,3 @@
-"use client";
-
 import { useShops } from "@/context/ShopContext";
 import { Store, Star, MapPin, Clock, TrendingUp } from "lucide-react";
 import {
@@ -13,7 +11,7 @@ import {
 
 const COLORS = ["#10b981", "#3b82f6", "#f59e0b", "#ef4444"];
 
-export default function AdminDashboard() {
+const AdminDashboard = () => {
   const { shops } = useShops();
   const avgRating = shops.length
     ? (shops.reduce((a, s) => a + s.rating, 0) / shops.length).toFixed(1)
@@ -36,10 +34,11 @@ export default function AdminDashboard() {
   // ── Pie Chart data: distribusi layanan ──
   const serviceData = [
     { name: "Photo Copy", value: shops.filter((s) => s.services.fotokopi).length },
-    { name: "Photo Copy Warna", value: shops.filter((s) => s.services.printWarna).length },
-    { name: "Jilid Hardcover", value: shops.filter((s) => s.services.jilid).length },
-    { name: "Print Ukuran Besar (A3/A3+)", value: shops.filter((s) => s.services.laminating).length },
+    { name: "Print Warna", value: shops.filter((s) => s.services.printWarna).length },
+    { name: "Jilid", value: shops.filter((s) => s.services.jilid).length },
+    { name: "Foto Copy Warna", value: shops.filter((s) => s.services.laminating).length },
   ];
+
 
   return (
     <div>
@@ -158,6 +157,8 @@ export default function AdminDashboard() {
             <p className="text-muted-foreground text-sm text-center py-12">Belum ada data</p>
           )}
         </div>
+
+
       </div>
 
       {/* ── Toko Terbaru ── */}
@@ -183,4 +184,6 @@ export default function AdminDashboard() {
       </div>
     </div>
   );
-}
+};
+
+export default AdminDashboard;

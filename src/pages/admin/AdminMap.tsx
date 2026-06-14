@@ -1,15 +1,14 @@
-"use client";
-
 import { useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import { useShops } from "@/context/ShopContext";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
-import { MapPin, Store } from "lucide-react";
+import { MapPin, Store, Pencil } from "lucide-react";
 import { formatHoursSummary } from "@/lib/hours-utils";
 
 const DRAMAGA_CENTER: [number, number] = [-6.5518, 106.722];
 
-export default function AdminMapClient() {
+const AdminMap = () => {
   const { shops, loading } = useShops();
   const mapRef = useRef<L.Map | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -67,9 +66,9 @@ export default function AdminMapClient() {
 
       const services = [];
       if (shop.services.fotokopi) services.push("Photo Copy");
-      if (shop.services.printWarna) services.push("Photo Copy Warna");
-      if (shop.services.jilid) services.push("Jilid Hardcover");
-      if (shop.services.laminating) services.push("Print Ukuran Besar (A3/A3+)");
+      if (shop.services.printWarna) services.push("Print Warna");
+      if (shop.services.jilid) services.push("Jilid");
+      if (shop.services.laminating) services.push("Foto Copy Warna");
 
       const popupContent = `
         <div style="min-width:200px;font-family:system-ui,sans-serif;">
@@ -128,4 +127,6 @@ export default function AdminMapClient() {
       </p>
     </div>
   );
-}
+};
+
+export default AdminMap;

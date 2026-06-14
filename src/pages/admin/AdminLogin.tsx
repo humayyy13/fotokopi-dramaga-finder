@@ -1,13 +1,10 @@
-"use client";
-
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
-import Link from "next/link";
+import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "@/context/AuthContext";
 import { Lock, Eye, EyeOff, ArrowLeft } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 
-export default function AdminLogin() {
+const AdminLogin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -16,14 +13,14 @@ export default function AdminLogin() {
   const [showSetup, setShowSetup] = useState(false);
   const [setupDone, setSetupDone] = useState(false);
   const { login, isAdmin, loading } = useAuth();
-  const router = useRouter();
+  const navigate = useNavigate();
 
   // Redirect if already logged in as admin
   useEffect(() => {
     if (!loading && isAdmin) {
-      router.replace("/admin");
+      navigate("/admin");
     }
-  }, [isAdmin, loading, router]);
+  }, [isAdmin, loading, navigate]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -32,7 +29,7 @@ export default function AdminLogin() {
     if (result.error) {
       setError(result.error);
     } else {
-      router.push("/admin");
+      navigate("/admin");
     }
   };
 
@@ -53,7 +50,7 @@ export default function AdminLogin() {
         setShowSetup(false);
         // Auto login
         await login(email, password);
-        router.push("/admin");
+        navigate("/admin");
       }
     } catch (err: any) {
       setError(err.message || "Terjadi kesalahan");
@@ -65,7 +62,7 @@ export default function AdminLogin() {
   return (
     <div className="min-h-screen flex items-center justify-center px-4 bg-background relative">
       <Link
-        href="/"
+        to="/"
         className="absolute top-6 left-6 flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
       >
         <ArrowLeft className="h-5 w-5" />
@@ -146,4 +143,6 @@ export default function AdminLogin() {
       </div>
     </div>
   );
-}
+};
+
+export default AdminLogin;

@@ -1,7 +1,5 @@
 import heroImage from '../assets/hero-illustration-transparent.png';
 
-const heroImageSrc = typeof heroImage === "string" ? heroImage : (heroImage as { src: string }).src;
-
 const HeroIllustration = () => {
     return (
         <div className="w-full max-w-lg mx-auto lg:mr-0 animate-fade-in relative" style={{ animationDelay: "0.2s" }}>
@@ -50,7 +48,7 @@ const HeroIllustration = () => {
             </div>
 
             <img 
-                src={heroImageSrc} 
+                src={heroImage} 
                 alt="Ilustrasi Mesin Photo Copy GIS" 
                 className="w-full h-auto relative z-10 drop-shadow-xl"
             />

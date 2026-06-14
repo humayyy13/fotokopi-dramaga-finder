@@ -1,6 +1,6 @@
 import { Star, MapPin } from "lucide-react";
 import { WhatsAppIcon } from "@/components/WhatsAppIcon";
-import Link from "next/link";
+import { Link } from "react-router-dom";
 import { Shop } from "@/data/shops";
 import { formatDistance, getWaLink } from "@/lib/geo-utils";
 import { formatHoursSummary } from "@/lib/hours-utils";
@@ -12,7 +12,7 @@ interface ShopCardProps {
 
 const ShopCard = ({ shop, distance }: ShopCardProps) => (
   <div className="block bg-card rounded-xl overflow-hidden card-shadow hover:card-shadow-hover transition-all duration-300 hover:-translate-y-1 relative group">
-    <Link href={`/shop/${shop.id}`} className="absolute inset-0 z-0" aria-label={`Detail toko ${shop.name}`}></Link>
+    <Link to={`/shop/${shop.id}`} className="absolute inset-0 z-0" aria-label={`Detail toko ${shop.name}`}></Link>
     <div className="h-40 bg-primary/10 flex items-center justify-center relative pointer-events-none">
       {shop.image ? (
         <img src={shop.image} alt={shop.name} className="w-full h-full object-cover" />
@@ -50,9 +50,9 @@ const ShopCard = ({ shop, distance }: ShopCardProps) => (
         )}
       </div>
       <div className="flex flex-wrap gap-1 mt-3">
-        {shop.services.printWarna && <span className="text-xs bg-primary/10 text-primary px-2 py-0.5 rounded-full">Photo Copy Warna</span>}
-        {shop.services.jilid && <span className="text-xs bg-primary/10 text-primary px-2 py-0.5 rounded-full">Jilid Hardcover</span>}
-        {shop.services.laminating && <span className="text-xs bg-primary/10 text-primary px-2 py-0.5 rounded-full">Print Ukuran Besar (A3/A3+)</span>}
+        {shop.services.printWarna && <span className="text-xs bg-primary/10 text-primary px-2 py-0.5 rounded-full">Print Warna</span>}
+        {shop.services.jilid && <span className="text-xs bg-primary/10 text-primary px-2 py-0.5 rounded-full">Jilid</span>}
+        {shop.services.laminating && <span className="text-xs bg-primary/10 text-primary px-2 py-0.5 rounded-full">Foto Copy Warna</span>}
       </div>
     </div>
   </div>

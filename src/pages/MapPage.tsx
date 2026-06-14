@@ -1,5 +1,3 @@
-"use client";
-
 import { useState, useMemo, useCallback, useEffect } from "react";
 import { useShops } from "@/context/ShopContext";
 import MapView from "@/components/MapView";
@@ -20,7 +18,7 @@ import {
 } from "lucide-react";
 import { WhatsAppIcon } from "@/components/WhatsAppIcon";
 
-export default function MapPageClient() {
+const MapPage = () => {
   const { shops, loading, getShop } = useShops();
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [search, setSearch] = useState("");
@@ -304,7 +302,7 @@ export default function MapPageClient() {
                   className="rounded-md border-border/60 text-primary focus:ring-primary w-4 h-4 transition-colors"
                 />
                 <span className="text-muted-foreground group-hover:text-foreground transition-colors font-medium">
-                  {key === "openNow" ? "Buka Sekarang" : key === "printWarna" ? "Photo Copy Warna" : key === "laminating" ? "Print Ukuran Besar (A3/A3+)" : key.charAt(0).toUpperCase() + key.slice(1)}
+                  {key === "openNow" ? "Buka Sekarang" : key === "printWarna" ? "Print Warna" : key === "laminating" ? "Foto Copy Warna" : key.charAt(0).toUpperCase() + key.slice(1)}
                 </span>
               </label>
             ))}
@@ -333,10 +331,10 @@ export default function MapPageClient() {
                   ? haversineDistance(userLocation.lat, userLocation.lng, shop.lat, shop.lng)
                   : null;
                 return (
-                  <div
+                  <button
                     key={shop.id}
                     onClick={() => setSelectedId(shop.id)}
-                    className={`w-full text-left p-4 rounded-2xl border cursor-pointer transition-all duration-200 ${
+                    className={`w-full text-left p-4 rounded-2xl border transition-all duration-200 ${
                       selectedId === shop.id
                         ? "border-primary bg-primary/5 shadow-md scale-[1.02]"
                         : "border-border/60 bg-white hover:border-primary/40 hover:shadow-sm"
@@ -383,7 +381,7 @@ export default function MapPageClient() {
                         </a>
                       )}
                     </div>
-                  </div>
+                  </button>
                 );
               })
             )}
@@ -409,4 +407,6 @@ export default function MapPageClient() {
       </div>
     </div>
   );
-}
+};
+
+export default MapPage;

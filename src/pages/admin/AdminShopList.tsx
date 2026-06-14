@@ -1,6 +1,4 @@
-"use client";
-
-import Link from "next/link";
+import { Link } from "react-router-dom";
 import { useShops } from "@/context/ShopContext";
 import { Pencil, Trash2, Plus, Star, Search, Download, ArrowUpDown, Filter } from "lucide-react";
 import { useState, useMemo } from "react";
@@ -10,7 +8,7 @@ import { formatHoursSummary } from "@/lib/hours-utils";
 type SortKey = "name" | "rating" | "hours";
 type SortDir = "asc" | "desc";
 
-export default function AdminShopList() {
+const AdminShopList = () => {
   const { shops, deleteShop } = useShops();
   const [confirmId, setConfirmId] = useState<string | null>(null);
 
@@ -81,9 +79,9 @@ export default function AdminShopList() {
       "Jam Buka",
       "Jam Tutup",
       "Photo Copy",
-      "Photo Copy Warna",
-      "Jilid Hardcover",
-      "Print Ukuran Besar (A3/A3+)",
+      "Print Warna",
+      "Jilid",
+      "Foto Copy Warna",
       "WhatsApp",
     ];
 
@@ -125,7 +123,7 @@ export default function AdminShopList() {
             <Download className="h-4 w-4" /> Export CSV
           </button>
           <Link
-            href="/admin/shops/create"
+            to="/admin/shops/create"
             className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-4 py-2 rounded-lg text-sm font-medium hover:bg-primary/90 transition-colors"
           >
             <Plus className="h-4 w-4" /> Tambah
@@ -193,9 +191,9 @@ export default function AdminShopList() {
             {(
               [
                 ["fotokopi", "Photo Copy"],
-                ["printWarna", "Photo Copy Warna"],
-                ["jilid", "Jilid Hardcover"],
-                ["laminating", "Print Ukuran Besar (A3/A3+)"],
+                ["printWarna", "Print Warna"],
+                ["jilid", "Jilid"],
+                ["laminating", "Foto Copy Warna"],
               ] as const
             ).map(([key, label]) => (
               <label key={key} className="flex items-center gap-2 text-sm cursor-pointer">
@@ -302,7 +300,7 @@ export default function AdminShopList() {
                       <td className="px-4 py-3">
                         <div className="flex items-center justify-end gap-1">
                           <Link
-                            href={`/admin/shops/edit/${shop.id}`}
+                            to={`/admin/shops/edit/${shop.id}`}
                             className="p-2 rounded-lg hover:bg-secondary transition-colors"
                           >
                             <Pencil className="h-4 w-4" />
@@ -342,4 +340,6 @@ export default function AdminShopList() {
       </div>
     </div>
   );
-}
+};
+
+export default AdminShopList;

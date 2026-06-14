@@ -1,24 +1,21 @@
-"use client";
-
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { Link, useLocation } from "react-router-dom";
 import { MapPin, Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
 
 const navItems = [
   { to: "/", label: "Beranda" },
-  { to: "/#about", label: "Tentang" },
   { to: "/map", label: "Peta" },
+  { to: "/#about", label: "Tentang" },
 ];
 
 const Navbar = () => {
-  const pathname = usePathname() || "/";
+  const location = useLocation();
   const [open, setOpen] = useState(false);
   const [activeSection, setActiveSection] = useState<string>("home");
 
   useEffect(() => {
     const handleScroll = () => {
-      if (pathname !== "/") {
+      if (location.pathname !== "/") {
         return;
       }
       
@@ -39,21 +36,21 @@ const Navbar = () => {
     setTimeout(handleScroll, 100);
 
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [pathname]);
+  }, [location.pathname]);
 
   const isActive = (to: string) => {
-    if (pathname === "/") {
+    if (location.pathname === "/") {
       if (to === "/#about") return activeSection === "about";
       if (to === "/") return activeSection === "home";
       return false;
     }
-    return pathname === to;
+    return location.pathname === to;
   };
 
   return (
     <nav className="sticky top-0 z-50 bg-card/80 backdrop-blur-md border-b">
       <div className="container mx-auto flex items-center justify-between h-16 px-4">
-        <Link href="/" className="flex items-center gap-2 font-bold text-xl text-primary tracking-tight">
+        <Link to="/" className="flex items-center gap-2 font-bold text-xl text-primary tracking-tight">
           <img src="/logo.png" alt="DraCopy Logo" className="w-9 h-9 object-cover rounded-full" />
           <span>DraCopy</span>
         </Link>
@@ -63,7 +60,7 @@ const Navbar = () => {
           {navItems.map((item) => (
             <Link
               key={item.to}
-              href={item.to}
+              to={item.to}
               className={`nav-ink-splash px-4 py-2 rounded-lg text-sm font-medium transition-colors ${isActive(item.to)
                 ? "bg-primary text-primary-foreground"
                 : "text-foreground hover:bg-secondary"
@@ -86,7 +83,7 @@ const Navbar = () => {
           {navItems.map((item) => (
             <Link
               key={item.to}
-              href={item.to}
+              to={item.to}
               onClick={() => setOpen(false)}
               className={`block px-4 py-2 rounded-lg text-sm font-medium transition-colors ${isActive(item.to)
                 ? "bg-primary text-primary-foreground"

@@ -1,31 +1,18 @@
-"use client";
-
-import Link from "next/link";
-import { useRouter, usePathname } from "next/navigation";
+import { Link, Outlet, useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "@/context/AuthContext";
 import { LayoutDashboard, List, PlusCircle, LogOut, MapPin, Map, Menu } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
-export default function AdminProtectedLayout({ children }: { children: React.ReactNode }) {
-  const { isAdmin, loading, logout } = useAuth();
-  const router = useRouter();
-  const pathname = usePathname();
+const AdminLayout = () => {
+  const { logout } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
   const [open, setOpen] = useState(false);
-
-  useEffect(() => {
-    if (!loading && !isAdmin) {
-      router.replace("/admin/login");
-    }
-  }, [loading, isAdmin, router]);
-
-  if (loading || !isAdmin) {
-    return <div className="min-h-screen flex items-center justify-center text-muted-foreground">Loading...</div>;
-  }
 
   const handleLogout = async () => {
     await logout();
-    router.replace("/admin/login");
+    navigate("/admin/login");
   };
 
   const links = [
@@ -38,7 +25,7 @@ export default function AdminProtectedLayout({ children }: { children: React.Rea
   const NavLinks = ({ onClick }: { onClick?: () => void }) => (
     <>
       <div className="p-4 border-b border-sidebar-border">
-        <Link href="/admin" onClick={onClick} className="flex items-center gap-2 font-bold text-lg">
+        <Link to="/admin" onClick={onClick} className="flex items-center gap-2 font-bold text-lg">
           <img src="/logo.png" alt="DraCopy Logo" className="w-6 h-6 object-cover rounded-full" />
           Admin Panel
         </Link>
@@ -47,10 +34,10 @@ export default function AdminProtectedLayout({ children }: { children: React.Rea
         {links.map((l) => (
           <Link
             key={l.to}
-            href={l.to}
+            to={l.to}
             onClick={onClick}
             className={`flex items-center gap-2 px-3 py-2.5 rounded-lg text-sm transition-colors ${
-              pathname === l.to
+              location.pathname === l.to
                 ? "bg-sidebar-accent text-sidebar-accent-foreground font-medium"
                 : "text-sidebar-foreground/80 hover:bg-sidebar-accent/50 hover:text-sidebar-foreground"
             }`}
@@ -62,7 +49,7 @@ export default function AdminProtectedLayout({ children }: { children: React.Rea
       </nav>
       <div className="p-3 border-t border-sidebar-border space-y-1">
         <Link 
-          href="/" 
+          to="/" 
           onClick={onClick}
           className="flex items-center gap-2 px-3 py-2.5 rounded-lg text-sm text-sidebar-foreground/80 hover:bg-sidebar-accent/50 hover:text-sidebar-foreground transition-colors"
         >
@@ -110,8 +97,10 @@ export default function AdminProtectedLayout({ children }: { children: React.Rea
 
       {/* Main Content */}
       <main className="flex-1 p-4 md:p-6 overflow-y-auto w-full max-w-full">
-        {children}
+        <Outlet />
       </main>
     </div>
   );
-}
+};
+
+export default AdminLayout;

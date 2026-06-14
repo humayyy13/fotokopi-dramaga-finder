@@ -1,16 +1,12 @@
-"use client";
-
-import { useParams } from "next/navigation";
-import Link from "next/link";
+import { useParams, Link } from "react-router-dom";
 import { useShops } from "@/context/ShopContext";
 import { getWaLink } from "@/lib/geo-utils";
 import { Star, MapPin, ArrowLeft, Printer, BookOpen, Shield, Copy, ExternalLink, Navigation } from "lucide-react";
 import { WhatsAppIcon } from "@/components/WhatsAppIcon";
 import { WeeklyHoursDisplay } from "@/components/WeeklyHoursDisplay";
 
-export default function ShopDetail() {
-  const params = useParams();
-  const id = params?.id as string;
+const ShopDetail = () => {
+  const { id } = useParams();
   const { getShop } = useShops();
   const shop = getShop(id || "");
 
@@ -19,7 +15,7 @@ export default function ShopDetail() {
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <h2 className="text-2xl font-bold mb-2">Toko tidak ditemukan</h2>
-          <Link href="/map" className="text-primary hover:underline">Kembali ke peta</Link>
+          <Link to="/map" className="text-primary hover:underline">Kembali ke peta</Link>
         </div>
       </div>
     );
@@ -27,9 +23,9 @@ export default function ShopDetail() {
 
   const serviceBadges = [
     { key: "fotokopi", label: "Photo Copy", icon: Copy, active: shop.services.fotokopi },
-    { key: "printWarna", label: "Photo Copy Warna", icon: Printer, active: shop.services.printWarna },
-    { key: "jilid", label: "Jilid Hardcover", icon: BookOpen, active: shop.services.jilid },
-    { key: "laminating", label: "Print Ukuran Besar (A3/A3+)", icon: Shield, active: shop.services.laminating },
+    { key: "printWarna", label: "Print Warna", icon: Printer, active: shop.services.printWarna },
+    { key: "jilid", label: "Jilid", icon: BookOpen, active: shop.services.jilid },
+    { key: "laminating", label: "Foto Copy Warna", icon: Shield, active: shop.services.laminating },
   ];
 
   const googleMapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${shop.lat},${shop.lng}`;
@@ -37,7 +33,7 @@ export default function ShopDetail() {
   return (
     <div className="min-h-screen py-8 px-4">
       <div className="container mx-auto max-w-3xl">
-        <Link href="/map" className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground mb-6 transition-colors">
+        <Link to="/map" className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground mb-6 transition-colors">
           <ArrowLeft className="h-4 w-4" /> Kembali ke Peta
         </Link>
 
@@ -94,7 +90,7 @@ export default function ShopDetail() {
                 <ExternalLink className="h-3.5 w-3.5" />
               </a>
               <Link
-                href="/map"
+                to="/map"
                 className="inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 text-primary-foreground px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-200 shadow-md hover:shadow-lg hover:-translate-y-0.5"
               >
                 <MapPin className="h-4 w-4" />
@@ -124,4 +120,6 @@ export default function ShopDetail() {
       </div>
     </div>
   );
-}
+};
+
+export default ShopDetail;

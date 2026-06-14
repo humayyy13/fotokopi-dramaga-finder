@@ -1,14 +1,43 @@
-"use client";
-
 import { useState, useMemo, useEffect } from "react";
-import Link from "next/link";
-import { Search, MapPin, Navigation, Loader2, Instagram } from "lucide-react";
+import { Link } from "react-router-dom";
+import { Search, MapPin, Copy, Navigation, Loader2, Instagram } from "lucide-react";
 import { useShops } from "@/context/ShopContext";
 import { useGeolocation } from "@/hooks/useGeolocation";
 import { sortByDistance, haversineDistance } from "@/lib/geo-utils";
 import ShopCard from "@/components/ShopCard";
 import HeroIllustration from "@/components/HeroIllustration";
 import CityscapeBackground from "@/components/CityscapeBackground";
+
+const LocationIcon = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 48 48" fill="none" className={className} xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="24" cy="42" rx="10" ry="3" fill="#1E3A8A" fillOpacity="0.1" />
+    <path d="M24 40C24 40 38 28 38 16C38 8.268 31.732 2 24 2C16.268 2 10 8.268 10 16C10 28 24 40 24 40Z" fill="#DBEAFE" />
+    <circle cx="24" cy="16" r="8" fill="#3B82F6" />
+    <circle cx="24" cy="16" r="3" fill="#EFF6FF" />
+  </svg>
+);
+
+const SearchIcon = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 48 48" fill="none" className={className} xmlns="http://www.w3.org/2000/svg">
+    <circle cx="20" cy="20" r="14" fill="#E9D5FF" />
+    <circle cx="20" cy="20" r="10" fill="#A855F7" />
+    <rect x="29" y="32" width="6" height="16" rx="3" transform="rotate(-45 29 32)" fill="#D8B4FE" />
+    <circle cx="20" cy="20" r="4" fill="#F3E8FF" />
+  </svg>
+);
+
+const UsersIcon = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 48 48" fill="none" className={className} xmlns="http://www.w3.org/2000/svg">
+    <circle cx="14" cy="20" r="6" fill="#A7F3D0" />
+    <path d="M6 38C6 33 10 29 16 29H18" stroke="#A7F3D0" strokeWidth="4" strokeLinecap="round" />
+
+    <circle cx="34" cy="20" r="6" fill="#A7F3D0" />
+    <path d="M42 38C42 33 38 29 32 29H30" stroke="#A7F3D0" strokeWidth="4" strokeLinecap="round" />
+
+    <circle cx="24" cy="16" r="8" fill="#10B981" />
+    <path d="M12 40C12 33 16 26 24 26C32 26 36 33 36 40H12Z" fill="#34D399" />
+  </svg>
+);
 
 const Index = () => {
   const { shops } = useShops();
@@ -122,7 +151,7 @@ const Index = () => {
                   {sortNearest ? "Terdekat Aktif" : "Toko Terdekat"}
                 </button>
                 <Link
-                  href="/map"
+                  to="/map"
                   className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-8 py-4 rounded-2xl font-bold text-lg shadow-md hover:shadow-xl hover:-translate-y-1 hover:bg-primary/95 transition-all duration-300 w-full sm:w-auto"
                 >
                   <MapPin className="h-5 w-5" />
@@ -171,6 +200,7 @@ const Index = () => {
       {/* Tentang Section */}
       <section id="about" className="py-20 px-4 bg-background border-t border-border/40 scroll-mt-16">
         <div className="container mx-auto max-w-5xl">
+          {/* Profil Pengembang */}
           <div className="bg-card rounded-3xl p-8 md:p-12 shadow-sm border border-border/40 max-w-4xl mx-auto animate-fade-in" style={{ animationDelay: "0.2s" }}>
             <h2 className="text-2xl font-bold mb-8 text-center text-foreground">Pengembang Sistem</h2>
             <div className="flex flex-col md:flex-row gap-8 items-center md:items-start">
