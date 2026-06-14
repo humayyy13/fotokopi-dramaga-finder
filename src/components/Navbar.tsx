@@ -4,8 +4,8 @@ import { useState, useEffect } from "react";
 
 const navItems = [
   { to: "/", label: "Beranda" },
-  { to: "/map", label: "Peta" },
   { to: "/#about", label: "Tentang" },
+  { to: "/map", label: "Peta" },
 ];
 
 const Navbar = () => {
