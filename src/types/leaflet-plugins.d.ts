@@ -1,6 +1,6 @@
-declare module "leaflet-routing-machine" {
-  import * as L from "leaflet";
+import * as L from "leaflet";
 
+declare module "leaflet-routing-machine" {
   namespace Routing {
     interface RoutingControlOptions {
       waypoints: L.LatLng[];
@@ -30,8 +30,6 @@ declare module "leaflet-routing-machine" {
 }
 
 declare module "leaflet.heat" {
-  import * as L from "leaflet";
-
   interface HeatLayerOptions {
     minOpacity?: number;
     maxZoom?: number;

@@ -274,7 +274,7 @@ const MapView = ({
           radius: 40,
           blur: 30,
           maxZoom: 17,
-          max: 1,
+          max: 4,
           gradient: {
             0.2: "#2ecc71",
             0.4: "#f1c40f",

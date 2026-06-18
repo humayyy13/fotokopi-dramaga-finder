@@ -10,7 +10,6 @@ import {
   MapPin,
   Map as MapIcon,
   Navigation,
-  Flame,
   Crosshair,
   X,
   Loader2,
@@ -36,9 +35,6 @@ const MapPage = () => {
   // ── Routing ──
   const [routeToShopId, setRouteToShopId] = useState<string | null>(null);
   const routeToShop = routeToShopId ? getShop(routeToShopId) || null : null;
-
-  // ── Heatmap ──
-  const [showHeatmap, setShowHeatmap] = useState(false);
 
   // ── Buffer Analysis ──
   const [bufferMode, setBufferMode] = useState(false);
@@ -155,18 +151,7 @@ const MapPage = () => {
           </div>
 
           {/* ── Tool Buttons ── */}
-          <div className="flex gap-2 mb-4">
-            <button
-              onClick={() => setShowHeatmap(!showHeatmap)}
-              className={`flex-1 flex items-center justify-center gap-1.5 py-2 rounded-xl text-xs font-semibold transition-all duration-200 border ${
-                showHeatmap
-                  ? "bg-orange-50 text-orange-600 border-orange-200 shadow-sm"
-                  : "bg-white text-muted-foreground border-border/60 hover:border-orange-300 hover:text-orange-500"
-              }`}
-            >
-              <Flame className="h-3.5 w-3.5" />
-              Heatmap
-            </button>
+          <div className="mb-4">
             <button
               onClick={() => {
                 if (bufferMode) {
@@ -175,7 +160,7 @@ const MapPage = () => {
                   setBufferMode(true);
                 }
               }}
-              className={`flex-1 flex items-center justify-center gap-1.5 py-2 rounded-xl text-xs font-semibold transition-all duration-200 border ${
+              className={`w-full flex items-center justify-center gap-1.5 py-2.5 rounded-xl text-xs font-semibold transition-all duration-200 border ${
                 bufferMode
                   ? "bg-red-50 text-red-600 border-red-200 shadow-sm"
                   : "bg-white text-muted-foreground border-border/60 hover:border-red-300 hover:text-red-500"
@@ -398,7 +383,6 @@ const MapPage = () => {
           onMarkerClick={setSelectedId}
           userLocation={userLocation}
           routeToShop={routeToShop}
-          showHeatmap={showHeatmap}
           bufferMode={bufferMode}
           bufferCenter={bufferCenter}
           bufferRadius={bufferRadius}
