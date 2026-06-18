@@ -29,8 +29,13 @@ const AdminShopList = () => {
   const [sortDir, setSortDir] = useState<SortDir>("asc");
 
   const handleDelete = async (id: string) => {
-    await deleteShop(id);
-    setConfirmId(null);
+    try {
+      await deleteShop(id);
+      setConfirmId(null);
+    } catch (err: any) {
+      console.error("Gagal menghapus toko:", err);
+      alert("Gagal menghapus toko: " + (err.message || "Terjadi kesalahan jaringan atau hak akses ditolak."));
+    }
   };
 
   const toggleService = (key: keyof typeof serviceFilter) =>

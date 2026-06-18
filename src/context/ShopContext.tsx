@@ -13,16 +13,37 @@ interface ShopContextType {
 
 const ShopContext = createContext<ShopContextType | undefined>(undefined);
 
+const getCachedShops = (): Shop[] => {
+  try {
+    const cached = localStorage.getItem("shops_cache");
+    if (cached) {
+      return JSON.parse(cached);
+    }
+  } catch (e) {
+    console.error("Failed to parse cached shops", e);
+  }
+  return [];
+};
+
 export const ShopProvider = ({ children }: { children: ReactNode }) => {
-  const [shops, setShops] = useState<Shop[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [shops, setShops] = useState<Shop[]>(getCachedShops());
+  const [loading, setLoading] = useState(shops.length === 0);
 
   const fetchShops = async () => {
-    const { data, error } = await supabase.from("shops").select("*").order("created_at", { ascending: true });
-    if (!error && data) {
-      setShops(data.map(dbRowToShop));
+    try {
+      const { data, error } = await supabase.from("shops").select("*").order("created_at", { ascending: true });
+      if (error) {
+        console.error("Gagal mengambil data toko dari Supabase:", error);
+      } else if (data) {
+        const parsedShops = data.map(dbRowToShop);
+        setShops(parsedShops);
+        localStorage.setItem("shops_cache", JSON.stringify(parsedShops));
+      }
+    } catch (err) {
+      console.error("Kesalahan jaringan/sistem saat memuat data toko:", err);
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   useEffect(() => {
@@ -33,22 +54,31 @@ export const ShopProvider = ({ children }: { children: ReactNode }) => {
     const row = shopToDbRow(shop);
     const { id, ...rest } = row;
     const { error } = await supabase.from("shops").insert(rest);
-    if (error) console.error("Supabase insert error:", error);
-    if (!error) await fetchShops();
+    if (error) {
+      console.error("Supabase insert error:", error);
+      throw error;
+    }
+    await fetchShops();
   };
 
   const updateShop = async (shop: Shop) => {
     const row = shopToDbRow(shop);
     const { id, ...rest } = row;
     const { error } = await supabase.from("shops").update(rest).eq("id", shop.id);
-    if (error) console.error("Supabase update error:", error);
-    if (!error) await fetchShops();
+    if (error) {
+      console.error("Supabase update error:", error);
+      throw error;
+    }
+    await fetchShops();
   };
 
   const deleteShop = async (id: string) => {
     const { error } = await supabase.from("shops").delete().eq("id", id);
-    if (error) console.error("Supabase delete error:", error);
-    if (!error) await fetchShops();
+    if (error) {
+      console.error("Supabase delete error:", error);
+      throw error;
+    }
+    await fetchShops();
   };
 
   const getShop = (id: string) => shops.find((s) => s.id === id);

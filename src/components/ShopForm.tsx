@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Shop } from "@/data/shops";
 import { parseWeeklyHours, DAYS_ORDER, WeeklyHours, DayHours } from "@/lib/hours-utils";
+import { supabase } from "@/integrations/supabase/client";
 
 interface ShopFormProps {
   initial?: Shop;
@@ -24,6 +25,10 @@ const ShopForm = ({ initial, onSubmit, title }: ShopFormProps) => {
     image: initial?.image || "",
     whatsapp: initial?.whatsapp || "",
   });
+
+  const [imageFile, setImageFile] = useState<File | null>(null);
+  const [imagePreview, setImagePreview] = useState<string>(initial?.image || "");
+  const [uploading, setUploading] = useState(false);
 
   const [weeklyHours, setWeeklyHours] = useState<WeeklyHours>(() =>
     parseWeeklyHours(initial?.hours || "", initial?.openTime || "09:00", initial?.closeTime || "19:00")
@@ -72,6 +77,39 @@ const ShopForm = ({ initial, onSubmit, title }: ShopFormProps) => {
     e.preventDefault();
     if (!validate()) return;
 
+    setUploading(true);
+    let imageUrl = form.image;
+
+    if (imageFile) {
+      try {
+        const fileExt = imageFile.name.split(".").pop();
+        const fileName = `${crypto.randomUUID()}.${fileExt}`;
+
+        const { data, error: uploadError } = await supabase.storage
+          .from("shop-images")
+          .upload(fileName, imageFile, {
+            cacheControl: "3600",
+            upsert: true,
+          });
+
+        if (uploadError) {
+          throw uploadError;
+        }
+
+        if (data) {
+          const { data: { publicUrl } } = supabase.storage
+            .from("shop-images")
+            .getPublicUrl(fileName);
+          imageUrl = publicUrl;
+        }
+      } catch (uploadError) {
+        console.error("Gagal mengunggah gambar:", uploadError);
+        alert("Gagal mengunggah gambar. Silakan coba lagi.");
+        setUploading(false);
+        return;
+      }
+    }
+
     const hours = JSON.stringify(weeklyHours);
     const firstOpenDay = DAYS_ORDER.find((day) => !weeklyHours[day].closed) || "Senin";
     const openTime = weeklyHours[firstOpenDay].open;
@@ -79,23 +117,32 @@ const ShopForm = ({ initial, onSubmit, title }: ShopFormProps) => {
     
     const whatsapp = waInput.trim() ? "62" + waInput.trim() : "";
 
-    await onSubmit({
-      id: initial?.id || crypto.randomUUID(),
-      ...form,
-      hours,
-      openTime,
-      closeTime,
-      whatsapp,
-    });
-    navigate("/admin/shops");
+    try {
+      await onSubmit({
+        id: initial?.id || crypto.randomUUID(),
+        ...form,
+        image: imageUrl,
+        hours,
+        openTime,
+        closeTime,
+        whatsapp,
+      });
+      navigate("/admin/shops");
+    } catch (err) {
+      console.error("Gagal menyimpan data toko:", err);
+      alert("Gagal menyimpan data toko.");
+    } finally {
+      setUploading(false);
+    }
   };
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
+      setImageFile(file);
       const reader = new FileReader();
       reader.onloadend = () => {
-        setForm((f) => ({ ...f, image: reader.result as string }));
+        setImagePreview(reader.result as string);
       };
       reader.readAsDataURL(file);
     }
@@ -242,7 +289,7 @@ const ShopForm = ({ initial, onSubmit, title }: ShopFormProps) => {
           <label className="text-sm font-medium mb-1 block">Gambar</label>
           <input type="file" accept="image/*" onChange={handleImageUpload}
             className="w-full text-sm" />
-          {form.image && <img src={form.image} alt="Preview" className="mt-2 h-32 rounded-lg object-cover" />}
+          {imagePreview && <img src={imagePreview} alt="Preview" className="mt-2 h-32 rounded-lg object-cover" />}
         </div>
 
         <div>
@@ -263,9 +310,9 @@ const ShopForm = ({ initial, onSubmit, title }: ShopFormProps) => {
         </div>
 
         <div className="flex gap-3 pt-2">
-          <button type="submit"
-            className="bg-primary text-primary-foreground px-6 py-2.5 rounded-lg font-medium text-sm hover:bg-primary/90 transition-colors">
-            Simpan
+          <button type="submit" disabled={uploading}
+            className="bg-primary text-primary-foreground px-6 py-2.5 rounded-lg font-medium text-sm hover:bg-primary/90 transition-colors disabled:opacity-50">
+            {uploading ? "Menyimpan..." : "Simpan"}
           </button>
           <button type="button" onClick={() => navigate("/admin/shops")}
             className="bg-secondary text-secondary-foreground px-6 py-2.5 rounded-lg font-medium text-sm hover:bg-secondary/80 transition-colors">

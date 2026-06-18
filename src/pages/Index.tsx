@@ -178,16 +178,16 @@ const Index = () => {
         <div className="container mx-auto">
           <h2 className="text-2xl font-bold text-center mb-2">Daftar Photo Copy</h2>
           <p className="text-muted-foreground text-center mb-10">
-            {loading ? "Memuat data toko..." : `${filtered.length} toko ditemukan${search ? ` untuk "${search}"` : ""}`}
+            {`${filtered.length} toko ditemukan${search ? ` untuk "${search}"` : ""}`}
             {sortNearest && lat != null && " — diurutkan berdasarkan jarak terdekat"}
           </p>
-          {loading ? (
-            <div className="flex justify-center items-center py-20">
-              <Loader2 className="h-10 w-10 animate-spin text-primary" />
-              <span className="ml-4 text-lg font-medium text-muted-foreground">Memuat data...</span>
-            </div>
-          ) : filtered.length === 0 ? (
+          {filtered.length === 0 && !loading ? (
             <p className="text-center text-muted-foreground py-12">Tidak ada toko yang ditemukan.</p>
+          ) : filtered.length === 0 && loading ? (
+             <div className="flex justify-center items-center py-20">
+               <Loader2 className="h-10 w-10 animate-spin text-primary" />
+               <span className="ml-4 text-lg font-medium text-muted-foreground">Memuat data...</span>
+             </div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {filtered.map((shop) => (
