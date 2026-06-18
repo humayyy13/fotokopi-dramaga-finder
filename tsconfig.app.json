@@ -27,7 +27,9 @@
     "types": [
       "vitest/globals"
     ],
-    "useDefineForClassFields": true
+    "useDefineForClassFields": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true
   },
   "include": [
     "src"
