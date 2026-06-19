@@ -16,6 +16,7 @@ import {
   Compass,
 } from "lucide-react";
 import { WhatsAppIcon } from "@/components/WhatsAppIcon";
+import SEO from "@/components/SEO";
 
 const MapPage = () => {
   const { shops, loading, getShop } = useShops();
@@ -109,6 +110,12 @@ const MapPage = () => {
 
   return (
     <div className="h-[calc(100vh-64px)] flex flex-col lg:flex-row bg-background overflow-hidden">
+      <SEO
+        title="Peta Lokasi Photo Copy Dramaga — SIG Fotokopi"
+        description="Jelajahi peta interaktif lokasi jasa photo copy di wilayah Dramaga, Bogor. Cari berdasarkan layanan, jam buka, dan radius terdekat."
+        path="/map"
+      />
+      <h1 className="sr-only">Peta Lokasi Photo Copy Dramaga</h1>
       {/* Sidebar */}
       <aside className="w-full lg:w-96 bg-card border-r flex flex-col h-[35vh] lg:h-full shadow-sm z-10 shrink-0">
 

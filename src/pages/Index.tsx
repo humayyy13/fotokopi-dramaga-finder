@@ -7,6 +7,7 @@ import { sortByDistance, haversineDistance } from "@/lib/geo-utils";
 import ShopCard from "@/components/ShopCard";
 import HeroIllustration from "@/components/HeroIllustration";
 import CityscapeBackground from "@/components/CityscapeBackground";
+import SEO from "@/components/SEO";
 
 const LocationIcon = ({ className }: { className?: string }) => (
   <svg viewBox="0 0 48 48" fill="none" className={className} xmlns="http://www.w3.org/2000/svg">
@@ -97,6 +98,17 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background relative overflow-hidden">
+      <SEO
+        title="SIG Fotokopi Dramaga — Cari Photo Copy Terdekat"
+        description="Temukan jasa photo copy terdekat di wilayah Dramaga, Bogor. Cari berdasarkan nama, alamat, atau lokasi terdekat dengan cepat dan mudah."
+        path="/"
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          name: "SIG Fotokopi Dramaga",
+          url: "https://fotocopy-dramaga.lovable.app/",
+        }}
+      />
       {/* Hero */}
       <section className="relative pt-20 pb-16 lg:pt-28 lg:pb-24 px-4 overflow-hidden">
         <CityscapeBackground />
