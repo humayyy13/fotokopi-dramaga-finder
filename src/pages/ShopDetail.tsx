@@ -4,6 +4,7 @@ import { getWaLink } from "@/lib/geo-utils";
 import { Star, MapPin, ArrowLeft, Printer, BookOpen, Shield, Copy, ExternalLink, Navigation } from "lucide-react";
 import { WhatsAppIcon } from "@/components/WhatsAppIcon";
 import { WeeklyHoursDisplay } from "@/components/WeeklyHoursDisplay";
+import SEO from "@/components/SEO";
 
 const ShopDetail = () => {
   const { id } = useParams();
@@ -30,8 +31,22 @@ const ShopDetail = () => {
 
   const googleMapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${shop.lat},${shop.lng}`;
 
+  const seoTitle = `${shop.name} — Photo Copy Dramaga`;
+  const seoDescription = `${shop.name} di ${shop.address}. Rating ${shop.rating}. Lihat layanan, jam buka, dan rute menuju lokasi.`;
+
+  const localBusinessLd: Record<string, unknown> = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    name: shop.name,
+    address: { "@type": "PostalAddress", streetAddress: shop.address, addressLocality: "Dramaga", addressRegion: "Jawa Barat", addressCountry: "ID" },
+    geo: { "@type": "GeoCoordinates", latitude: shop.lat, longitude: shop.lng },
+    aggregateRating: { "@type": "AggregateRating", ratingValue: shop.rating, ratingCount: 1 },
+    ...(shop.whatsapp ? { telephone: shop.whatsapp } : {}),
+  };
+
   return (
     <div className="min-h-screen py-8 px-4">
+      <SEO title={seoTitle} description={seoDescription} path={`/shop/${shop.id}`} jsonLd={localBusinessLd} />
       <div className="container mx-auto max-w-3xl">
         <Link to="/map" className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground mb-6 transition-colors">
           <ArrowLeft className="h-4 w-4" /> Kembali ke Peta
@@ -99,7 +114,7 @@ const ShopDetail = () => {
             </div>
 
             {/* Service badges */}
-            <h3 className="font-semibold mb-3">Layanan</h3>
+            <h2 className="font-semibold mb-3">Layanan</h2>
             <div className="flex flex-wrap gap-2">
               {serviceBadges.map((s) => (
                 <div

@@ -188,6 +188,7 @@ const MapPage = () => {
                 </h4>
                 <button
                   onClick={resetBuffer}
+                  aria-label="Tutup analisis buffer"
                   className="p-1 rounded-md hover:bg-red-100 text-red-400 hover:text-red-600 transition-colors"
                 >
                   <X className="h-4 w-4" />
@@ -242,6 +243,7 @@ const MapPage = () => {
                 </h4>
                 <button
                   onClick={() => setRouteToShopId(null)}
+                  aria-label="Tutup navigasi"
                   className="p-1 rounded-md hover:bg-blue-100 text-blue-400 hover:text-blue-600 transition-colors"
                 >
                   <X className="h-4 w-4" />
